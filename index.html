@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarim | Computer Science Student Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1F2937', // Dark Gray/Almost Black
+                        'secondary': '#4B5563', // Medium Gray
+                        'accent': '#3B82F6', // Blue for accents
+                        'background': '#F9FAFB', // Light Gray/Off-White
+                        'card-bg': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Injecting Inter font -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+    </style>
+</head>
+<body class="bg-background text-primary font-sans antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-card-bg shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Name -->
+                <a href="#home" class="text-xl font-extrabold text-primary hover:text-accent transition duration-300">Sarim Hasan</a>
+                
+                <!-- Navigation Links (Hidden on small screens) -->
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#about" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">About & Skills</a>
+                    <a href="#projects" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">Projects</a>
+                    <a href="#contact" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" type="button" class="sm:hidden inline-flex items-center justify-center p-2 rounded-md text-secondary hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <!-- Icon when menu is closed -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <!-- Icon when menu is open (will be toggled by JS) -->
+                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#about" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">About & Skills</a>
+                <a href="#projects" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">Projects</a>
+                <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- 1. Home / Introduction Section -->
+<section id="home" class="min-h-[calc(100vh-64px)] flex items-center justify-center pt-0 mb-24">
+
+            <div class="text-center max-w-4xl">
+                <span class="text-accent font-semibold text-lg uppercase tracking-wider">Hello, I'm Sarim.</span>
+                <h1 class="text-5xl sm:text-7xl font-extrabold mt-4 mb-6 leading-tight">
+                    <span class="block">Android developer</span>
+                    <span class="block text-secondary">@Paytm.</span>
+                </h1>
+                <p class="text-xl text-secondary mb-8 max-w-2xl mx-auto">
+                    A developer who lives on “Eat, Sleep, Code, Repeat,” building apps that turn ideas into reality and bugs into victory
+                </p>
+                <!-- Main Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#projects" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-accent hover:bg-blue-700 transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
+                        View Projects
+                    </a>
+                    <!-- Replace '#' with your actual resume download link -->
+                    <a href="assets/My.pdf" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border-2 border-accent text-base font-medium rounded-xl text-accent bg-transparent hover:bg-blue-50 transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-200 my-16"></div>
+
+        <!-- 2. About & Skills Section -->
+        <section id="about" class="py-16 md:py-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">About Me & Technical Skills</h2>
+                <p class="text-xl text-secondary max-w-3xl mx-auto">
+                    A brief overview of my background, current focus, and core competencies.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- About Text -->
+                <div class="bg-card-bg p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent">My Journey</h3>
+                    <p class="mb-4 text-secondary leading-relaxed">I am a final semester Computer Science Engineering student at Jamia Hamdard University, currently holding a CGPA of 7.5. Throughout my academic journey, I have been actively involved in various college activities—from fests to educational trips—where I have consistently performed well and contributed with enthusiasm.</p>
+                    <p class="text-secondary leading-relaxed">
+                       Alongside my studies, I am pursuing an internship at Paytm as an Android Developer. This role allows me to work with modern technologies, build real-world applications, and constantly improve my software development skills.
+                       My dream is to become a skilled Software Engineer, and I continue learning every day to get closer to that goal.
+                    <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="inline-block mt-4 text-accent hover:underline font-medium">
+                        View My LinkedIn Profile &rarr;
+                    </a>
+                </div>
+
+                <!-- Skills -->
+                <div class="bg-card-bg p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent">Core Skills</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <!-- Use a minimal tag style -->
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Python</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">JavaScript Basic</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">My SQL</span>
+                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Git & GitHub</span>
+                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Java</span>
+                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Html & CSS</span>
+                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Data structure & Algorithms</span>
+                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">flutter basic</span>
+                                                                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">REST API</span>
+                                                                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">kotlin</span>
+                                                                                                                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">XML</span>
+                                                                                                                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Firebase</span>
+                                                                                                                                                                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Android</span>
+                                                                                                                                                                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Object oriented</span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-semibold mt-8 mb-4 text-accent">Problem Solving</h3>
+                    <div class="flex gap-4">
+                        <!-- Replace with your actual LeetCode and GitHub profiles -->
+                        <a href="https://github.com/Sarim2022" target="_blank" class="text-secondary hover:text-primary transition duration-300">
+                            <img src="https://img.icons8.com/material-outlined/32/4B5563/github.png" alt="GitHub" class="inline-block w-8 h-8"/>
+                            <span class="ml-1 text-sm font-medium">GitHub</span>
+                        </a>
+                        <a href="https://leetcode.com/Sarimhasan2022" target="_blank" class="text-secondary hover:text-primary transition duration-300">
+                            <img src="LeetCode_logo_black.png" alt="LeetCode" class="inline-block w-8 h-8"/>
+                            <span class="ml-1 text-sm font-medium">LeetCode</span>
+                        </a>
+                        <a href="https://www.geeksforgeeks.org/profile/sarimhasowyc" target="_blank" class="text-secondary hover:text-primary transition duration-300">
+                            <img src="GeeksforGeeks.jpg" alt="LeetCode" class="inline-block w-8 h-8"/>
+                            <span class="ml-1 text-sm font-medium">GeeksforGeeks</span>
+                        </a>
+                        
+                      
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-200 my-16"></div>
+
+        <!-- 3. Projects Section -->
+        <section id="projects" class="py-16 md:py-24">
+            
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
+                <p class="text-xl text-secondary max-w-3xl mx-auto">
+                    Showcasing my capability to deliver full-stack and scalable solutions.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1: E-commerce Clone -->
+                <div class="bg-card-bg p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2 text-primary">💊 MedReminders</h3>
+                    <p class="text-sm text-secondary mb-4 flex-grow">
+                       MedReminders is a mobile application that allows users to:
+
+Authenticate and manage secure accounts
+Set up medication reminders
+Generate personalized schedules using a machine learning model
+Ensure seamless data sync with Firebase</p>
+                    <div class="text-sm font-medium space-x-2 mb-4">
+                        <span class="text-blue-600">#Flutter</span>
+                        <span class="text-green-600">#Dart</span>
+                        <span class="text-yellow-600">#Firebase</span>
+                          <span class="text-blue-600">#Cursor.ai</span>
+                        <span class="text-green-600">#GitHub Pages + Jekyll </span>
+                        <span class="text-yellow-600">#WebIntoApp</span>
+                    </div>
+                    <div class="flex space-x-4 mt-auto">
+                        <!-- Replace '#' with actual links -->
+                        <a href="https://sarim2022.github.io/medremainders" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center">
+                            Live Demo 
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                        <a href="https://github.com/Sarim2022/medremainders" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center">
+                            Source Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: Data Visualizer -->
+                <div class="bg-card-bg p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2 text-primary">✅ Android-ToDo-App</h3>
+                    <p class="text-sm text-secondary mb-4 flex-grow">
+                       A simple and robust To-Do List application built with Kotlin and integrated with Google Firebase for backend services.
+                       Key Features
+Google Authentication: Seamless sign-in and account management using Google Sign-In.
+
+
+                    </p>
+                    <div class="text-sm font-medium space-x-2 mb-4">
+                        <span class="text-purple-600">#kotlin</span>
+                        <span class="text-red-600">#xml</span>
+                        <span class="text-gray-600">#firebase</span>
+                        <span class="text-purple-600">#Github</span>
+                    </div>
+                    <div class="flex space-x-4 mt-auto">
+                        <a href="https://github.com/Sarim2022/Android-ToDo-App/releases/download/v1.0.0/app-debug.apk" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center">
+                            Live Demo
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                        <a href="https://github.com/Sarim2022/Android-ToDo-App" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center">
+                            Source Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: Final Year Project -->
+                <div class="bg-card-bg p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-xl font-bold mb-2 text-primary">💀 MarkMyAttendence android app</h3>
+                    <p class="text-sm text-secondary mb-4 flex-grow">
+                      A smart attendance management system where students can mark their attendance from home, inside the college, or in the classroom. Teachers receive attendance in real-time, verify students' presence manually or through auto-scan (location or proximity check).
+                    <div class="text-sm font-medium space-x-2 mb-4">
+                        <span class="text-orange-600">#Kotlin</span>
+                        <span class="text-blue-400">#XML</span>
+                        <span class="text-gray-600">#Android</span>
+                               <span class="text-gray-600">#Firebase</span>
+                                      <span class="text-gray-600">#Github</span>
+                                             <span class="text-gray-600">#android studio</span>
+                    </div>
+                    <div class="flex space-x-4 mt-auto">
+                        <a href="https://github.com/Sarim2022/markme/releases/download/v1.0.0/app-debug.apk" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center">
+                            Live Demo
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                        <a href="https://github.com/Sarim2022/markme" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center">
+                            Source Code
+                        </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-secondary">Need to see more?</p>
+                <!-- Replace with your full projects page or GitHub profile -->
+                <a href="https://github.com/Sarim2022" target="_blank" class="inline-flex mt-2 items-center text-accent hover:underline font-bold">
+                    View All GitHub Repositories &rarr;
+                </a>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-200 my-16"></div>
+
+        <!-- 4. Contact Section -->
+        <section id="contact" class="py-16 md:py-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                <p class="text-xl text-secondary max-w-3xl mx-auto">
+                    I'm open to full-time roles, internships, and collaboration opportunities. Let's build something great.
+                </p>
+            </div>
+
+            <div class="max-w-xl mx-auto bg-card-bg p-8 rounded-2xl shadow-xl border border-gray-100">
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-primary">Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent" placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-primary">Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-primary">Message</label>
+                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent" placeholder="Tell me about your project or opportunity..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-accent hover:bg-blue-700 transition duration-300">
+                        Send Message
+                    </button>
+                    <!-- Form Submission Status/Message Container -->
+                    <p id="form-status" class="text-center text-sm font-medium hidden"></p>
+                </form>
+            </div>
+
+            <!-- Social Media & Profile Links -->
+            <div class="mt-12 text-center">
+                <h3 class="text-2xl font-semibold mb-6 text-accent">Find Me Online</h3>
+                <div class="flex justify-center space-x-6">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="text-secondary hover:text-blue-600 transition duration-300">
+                        <img src="https://img.icons8.com/color/48/4B5563/linkedin.png" alt="LinkedIn" class="w-10 h-10"/>
+                    </a>
+                    <!-- GitHub -->
+                    <a href="https://github.com/Sarim2022" target="_blank" class="text-secondary hover:text-primary transition duration-300">
+                        <img src="https://img.icons8.com/material-outlined/48/4B5563/github.png" alt="GitHub" class="w-10 h-10"/>
+                    </a>
+                    <!-- instagram -->
+                    <a href="https://www.instagram.com/Sarimknowuh" target="_blank" class="text-secondary hover:text-blue-400 transition duration-300">
+                        <img src="https://img.icons8.com/ios-filled/48/4B5563/twitterx.png" alt="Instagram" class="w-10 h-10"/>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-background py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; <span id="current-year"></span> Sarim. Built with minimal HTML/CSS/JS.</p>
+            <p class="mt-1">Computer Science Student | Jamia Hamdard University</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for smooth scrolling and mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Smooth Scroll Logic
+            document.querySelectorAll('a.nav-link[href^="#"], a[href="#projects"], a[href="#about"], a[href="#contact"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        // Scroll to the element smoothly
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start' // Aligns the top of the element with the top of the viewport
+                        });
+                        
+                        // Close mobile menu after clicking a link
+                        if (document.getElementById('mobile-menu').classList.contains('block')) {
+                            toggleMobileMenu();
+                        }
+                    }
+                });
+            });
+
+            // Mobile Menu Toggle Logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('block');
+                
+                // Toggle the icons inside the button
+                const closedIcon = mobileMenuButton.querySelector('svg:first-child');
+                const openIcon = mobileMenuButton.querySelector('svg:last-child');
+                
+                closedIcon.classList.toggle('hidden');
+                openIcon.classList.toggle('hidden');
+            }
+
+            mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+            // Contact Form Submission Simulation (Minimal setup)
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                formStatus.classList.remove('hidden', 'text-red-500', 'text-green-600');
+                formStatus.classList.add('text-gray-500');
+                formStatus.textContent = 'Sending message... (This is a static portfolio simulation)';
+
+                setTimeout(() => {
+                    // In a real application, you would send data to a backend API here.
+                    // For this minimal static site, we just show success.
+                    formStatus.classList.remove('text-gray-500');
+                    formStatus.classList.add('text-green-600');
+                    formStatus.textContent = 'Thank you! Your message has been noted. I will be in touch soon.';
+                    contactForm.reset(); // Clear the form
+                }, 1500);
+
+            });
+        });
+    </script>
+</body>
+</html>
