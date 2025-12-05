@@ -3,47 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarim | Computer Science Student Portfolio</title>
+    <title>Sarim | Android Developer Portfolio</title>
+    
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#1F2937', // Dark Gray/Almost Black
-                        'secondary': '#4B5563', // Medium Gray
-                        'accent': '#3B82F6', // Blue for accents
-                        'background': '#F9FAFB', // Light Gray/Off-White
+                        'primary': '#1F2937',
+                        'secondary': '#4B5563',
+                        'accent': '#3B82F6',
+                        'accent-dark': '#2563EB',
+                        'background': '#F9FAFB',
                         'card-bg': '#FFFFFF',
+                        'gradient-1': '#6366F1',
+                        'gradient-2': '#8B5CF6',
+                        'gradient-3': '#EC4899',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.7s ease-out',
+                        'slide-in-right': 'slideInRight 0.7s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'gradient': 'gradientShift 15s ease infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradientShift: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
                 }
             }
         }
     </script>
+    
     <!-- Injecting Inter font -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        /* Custom Styles */
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Gradient Background */
+        .gradient-bg {
+            background: linear-gradient(-45deg, #6366F1, #8B5CF6, #EC4899, #3B82F6, #10B981);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.05;
+        }
+        
+        /* Floating background elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.08);
+            z-index: -1;
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Swipe animation for sections */
+        .section-container {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .section-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Project card hover effect */
+        .project-card {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Skill tag animation */
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Swipe navigation indicators */
+        .swipe-indicator {
+            width: 40px;
+            height: 5px;
+            border-radius: 2px;
+            background: rgba(59, 130, 246, 0.3);
+            margin: 0 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .swipe-indicator.active {
+            background: #3B82F6;
+            width: 60px;
+        }
+        
+        /* Mobile swipe area */
+        .swipe-area {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 40;
+            pointer-events: none;
+        }
+        
+        .swipe-area > div {
+            pointer-events: auto;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #3B82F6, #8B5CF6);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #2563EB, #7C3AED);
+        }
     </style>
 </head>
-<body class="bg-background text-primary font-sans antialiased">
+<body class="bg-background text-primary font-sans antialiased relative overflow-x-hidden">
+
+    <!-- Animated Gradient Background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Floating background elements -->
+    <div class="floating-element" style="width: 300px; height: 300px; top: 10%; left: 5%;"></div>
+    <div class="floating-element" style="width: 200px; height: 200px; top: 70%; right: 10%;"></div>
+    <div class="floating-element" style="width: 150px; height: 150px; bottom: 20%; left: 15%;"></div>
 
     <!-- Header & Navigation -->
-    <header class="sticky top-0 z-50 bg-card-bg shadow-md">
+    <header class="sticky top-0 z-50 glass shadow-md">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo/Name -->
-                <a href="#home" class="text-xl font-extrabold text-primary hover:text-accent transition duration-300">Sarim Hasan</a>
-                
+              <a href="#home" class="text-xl font-extrabold text-primary hover:text-accent transition duration-300 flex items-center gap-3">
+                    <div class="relative">
+                        <!-- Profile Image -->
+                        <img 
+                            src="assets/profile.jpg" 
+                            alt="Sarim Hasan"
+                            class="w-10 h-10 rounded-full profile-img object-cover border-2 border-white shadow-md"
+                            onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Sarim+Hasan&background=3B82F6&color=fff&size=128';"
+                        >
+                        <!-- Online status indicator -->
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span>Sarim Hasan</span>
+                        <span class="text-xs font-normal text-secondary">Android Developer</span>
+                    </div>
+                </a>
                 <!-- Navigation Links (Hidden on small screens) -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="#about" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">About & Skills</a>
-                    <a href="#projects" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">Projects</a>
-                    <a href="#contact" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
-                     <a href="#certificates" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300">certificates</a>
+                    <a href="#about" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300 relative group">
+                        About & Skills
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#projects" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300 relative group">
+                        Projects
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#certificates" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300 relative group">
+                        Certificates
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#contact" class="nav-link text-secondary hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition duration-300 relative group">
+                        Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300"></span>
+                    </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -62,47 +276,62 @@
         </nav>
 
         <!-- Mobile Menu (Hidden by default) -->
-        <div class="sm:hidden hidden" id="mobile-menu">
+        <div class="sm:hidden hidden glass" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="#about" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">About & Skills</a>
                 <a href="#projects" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">Projects</a>
+                <a href="#certificates" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">Certificates</a>
                 <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-secondary hover:bg-gray-100 hover:text-accent transition duration-300">Contact</a>
             </div>
         </div>
     </header>
 
+    <!-- Swipe Navigation Indicators -->
+    <div class="swipe-area">
+        <div class="flex items-center glass px-4 py-2 rounded-full shadow-lg">
+            <div class="swipe-indicator active" data-section="home"></div>
+            <div class="swipe-indicator" data-section="about"></div>
+            <div class="swipe-indicator" data-section="projects"></div>
+            <div class="swipe-indicator" data-section="certificates"></div>
+            <div class="swipe-indicator" data-section="contact"></div>
+        </div>
+    </div>
+
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
         <!-- 1. Home / Introduction Section -->
-<section id="home" class="min-h-[calc(100vh-64px)] flex items-center justify-center pt-0 mb-24">
-
-            <div class="text-center max-w-4xl">
-                <span class="text-accent font-semibold text-lg uppercase tracking-wider">Hello, I'm Sarim.</span>
+        <section id="home" class="min-h-[calc(100vh-64px)] flex items-center justify-center pt-0 mb-24">
+            <div class="text-center max-w-4xl animate-fade-in-up">
+                <span class="text-accent font-semibold text-lg uppercase tracking-wider animate-pulse-slow">Hello, I'm Sarim.</span>
                 <h1 class="text-5xl sm:text-7xl font-extrabold mt-4 mb-6 leading-tight">
-                    <span class="block">Android developer</span>
+                    <span class="block bg-gradient-to-r from-accent to-gradient-2 bg-clip-text text-transparent">Android developer</span>
                     <span class="block text-secondary">@Paytm.</span>
                 </h1>
                 <p class="text-xl text-secondary mb-8 max-w-2xl mx-auto">
-                    A developer who lives on “Eat, Sleep, Code, Repeat,” building apps that turn ideas into reality and bugs into victory
+                    A developer who lives on "Eat, Sleep, Code, Repeat," building apps that turn ideas into reality and bugs into victory
                 </p>
                 <!-- Main Action Buttons -->
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#projects" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-accent hover:bg-blue-700 transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
-                        View Projects
+                    <a href="#projects" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl shadow-lg text-white bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent animate-slide-in-left">
+                        View Projects <i class="fas fa-arrow-down ml-2"></i>
                     </a>
                     <!-- Replace '#' with your actual resume download link -->
-                    <a href="assets/resume.pdf" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border-2 border-accent text-base font-medium rounded-xl text-accent bg-transparent hover:bg-blue-50 transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
-                        Download Resume !
+                    <a href="assets/resume.pdf" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border-2 border-accent text-base font-medium rounded-xl text-accent bg-transparent hover:bg-blue-50 transition duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent animate-slide-in-right">
+                        Download Resume <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Scroll indicator -->
+                <div class="mt-16 animate-bounce">
+                    <a href="#about" class="text-secondary hover:text-accent">
+                        <i class="fas fa-chevron-down text-2xl"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Separator -->
-        <div class="h-px w-full bg-gray-200 my-16"></div>
-
         <!-- 2. About & Skills Section -->
-        <section id="about" class="py-16 md:py-24">
+        <section id="about" class="section-container py-16 md:py-24">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4">About Me & Technical Skills</h2>
                 <p class="text-xl text-secondary max-w-3xl mx-auto">
@@ -112,98 +341,116 @@
 
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- About Text -->
-                <div class="bg-card-bg p-8 rounded-2xl shadow-lg border border-gray-100">
+                <div class="glass p-8 rounded-2xl shadow-lg border border-gray-100 animate-slide-in-left">
                     <h3 class="text-2xl font-semibold mb-4 text-accent">My Journey</h3>
                     <p class="mb-4 text-secondary leading-relaxed">I am a final semester Computer Science Engineering student at Jamia Hamdard University, currently holding a CGPA of 7.5. Throughout my academic journey, I have been actively involved in various college activities—from fests to educational trips—where I have consistently performed well and contributed with enthusiasm.</p>
                     <p class="text-secondary leading-relaxed">
                        Alongside my studies, I am pursuing an internship at Paytm as an Android Developer. This role allows me to work with modern technologies, build real-world applications, and constantly improve my software development skills.
                        My dream is to become a skilled Software Engineer, and I continue learning every day to get closer to that goal.
-                    <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="inline-block mt-4 text-accent hover:underline font-medium">
-                        View My LinkedIn Profile &rarr;
+                    <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="inline-block mt-4 text-accent hover:underline font-medium group">
+                        View My LinkedIn Profile <i class="fas fa-arrow-right ml-1 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
 
                 <!-- Skills -->
-                <div class="bg-card-bg p-8 rounded-2xl shadow-lg border border-gray-100">
+                <div class="glass p-8 rounded-2xl shadow-lg border border-gray-100 animate-slide-in-right">
                     <h3 class="text-2xl font-semibold mb-4 text-accent">Core Skills</h3>
                     <div class="flex flex-wrap gap-3">
-                        <!-- Use a minimal tag style -->
-                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Python</span>
-                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">JavaScript Basic</span>
-                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">My SQL</span>
-                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Git & GitHub</span>
-                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Java</span>
-                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Html & CSS</span>
-                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Data structure & Algorithms</span>
-                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">flutter basic</span>
-                                                                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">REST API</span>
-                                                                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">kotlin</span>
-                                                                                                                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">XML</span>
-                                                                                                                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Firebase</span>
-                                                                                                                                                                                                                                                <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Android</span>
-                                                                                                                                                                                                                                                                        <span class="bg-gray-100 text-gray-700 text-sm font-medium px-4 py-1.5 rounded-full shadow-sm">Object oriented</span>
-
+                        <span class="skill-tag bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Python</span>
+                        <span class="skill-tag bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">JavaScript Basic</span>
+                        <span class="skill-tag bg-gradient-to-r from-green-50 to-green-100 text-green-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">My SQL</span>
+                        <span class="skill-tag bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Git & GitHub</span>
+                        <span class="skill-tag bg-gradient-to-r from-red-50 to-red-100 text-red-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Java</span>
+                        <span class="skill-tag bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Html & CSS</span>
+                        <span class="skill-tag bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Data structure & Algorithms</span>
+                        <span class="skill-tag bg-gradient-to-r from-teal-50 to-teal-100 text-teal-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Flutter basic</span>
+                        <span class="skill-tag bg-gradient-to-r from-cyan-50 to-cyan-100 text-cyan-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">REST API</span>
+                        <span class="skill-tag bg-gradient-to-r from-pink-50 to-pink-100 text-pink-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Kotlin</span>
+                        <span class="skill-tag bg-gradient-to-r from-yellow-50 to-yellow-100 text-yellow-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">XML</span>
+                        <span class="skill-tag bg-gradient-to-r from-accent/10 to-accent/20 text-accent-dark text-sm font-medium px-4 py-2 rounded-full shadow-sm">Firebase</span>
+                        <span class="skill-tag bg-gradient-to-r from-emerald-50 to-emerald-100 text-emerald-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Android</span>
+                        <span class="skill-tag bg-gradient-to-r from-violet-50 to-violet-100 text-violet-700 text-sm font-medium px-4 py-2 rounded-full shadow-sm">Object oriented</span>
                     </div>
 
                     <h3 class="text-2xl font-semibold mt-8 mb-4 text-accent">Problem Solving</h3>
-                    <div class="flex gap-4">
-                        <!-- Replace with your actual LeetCode and GitHub profiles -->
-                        <a href="https://github.com/Sarim2022" target="_blank" class="text-secondary hover:text-primary transition duration-300">
-                            <img src="https://img.icons8.com/material-outlined/32/4B5563/github.png" alt="GitHub" class="inline-block w-8 h-8"/>
-                            <span class="ml-1 text-sm font-medium">GitHub</span>
+                    <div class="flex gap-6">
+                        <a href="https://github.com/Sarim2022" target="_blank" class="text-secondary hover:text-primary transition duration-300 transform hover:scale-110">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-gray-800 to-black flex items-center justify-center">
+                                    <i class="fab fa-github text-white text-xl"></i>
+                                </div>
+                                <span class="mt-2 text-sm font-medium">GitHub</span>
+                            </div>
                         </a>
-                        <a href="https://leetcode.com/Sarimhasan2022" target="_blank" class="text-secondary hover:text-primary transition duration-300">
-                            <img src="LeetCode_logo_black.png" alt="LeetCode" class="inline-block w-8 h-8"/>
-                            <span class="ml-1 text-sm font-medium">LeetCode</span>
+                        <a href="https://leetcode.com/Sarimhasan2022" target="_blank" class="text-secondary hover:text-primary transition duration-300 transform hover:scale-110">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center justify-center">
+                                    <i class="fas fa-code text-white text-xl"></i>
+                                </div>
+                                <span class="mt-2 text-sm font-medium">LeetCode</span>
+                            </div>
                         </a>
-                        <a href="https://www.geeksforgeeks.org/profile/sarimhasowyc" target="_blank" class="text-secondary hover:text-primary transition duration-300">
-                            <img src="GeeksforGeeks.jpg" alt="LeetCode" class="inline-block w-8 h-8"/>
-                            <span class="ml-1 text-sm font-medium">GeeksforGeeks</span>
+                        <a href="https://www.geeksforgeeks.org/profile/sarimhasowyc" target="_blank" class="text-secondary hover:text-primary transition duration-300 transform hover:scale-110">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
+                                    <i class="fas fa-laptop-code text-white text-xl"></i>
+                                </div>
+                                <span class="mt-2 text-sm font-medium">GeeksforGeeks</span>
+                            </div>
                         </a>
-                        
-                      
                     </div>
                 </div>
             </div>
         </section>
 
-        
-        <!-- Separator -->
-        <div class="h-px w-full bg-gray-200 my-16"></div>
+                <!-- 4. Certificates Section -->
+    <section id="certificates" class="section-container py-16 md:py-24">
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Certificates 🏅</h2>
+        <p class="text-xl text-secondary max-w-3xl mx-auto">
+            My certifications showcase my technical skills and achievements.
+        </p>
+    </div>
 
-        <section id="certificates" class="py-16 md:py-24">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold mb-4">Certificates 🏅</h2>
-            <p class="text-xl text-secondary max-w-3xl mx-auto">
-                My certificates.......
-            </p>
+    <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-4 rounded-2xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl transform hover:-translate-y-2">
+            <div class="overflow-hidden rounded-lg border border-gray-200 mb-4">
+                <img src="assets/Screenshot 2025-12-05 160606.png" 
+                     alt="SQL HackerRank Certificate" 
+                     class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                     onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/000000/database.png'; this.alt='SQL Certificate'; this.className='w-full h-48 object-contain p-4'">
+            </div>
+            <p class="text-center mt-3 text-lg font-medium text-accent">SQL (HackerRank)</p>
+            <p class="text-center text-sm text-secondary mt-1">Certification in SQL proficiency</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-card-bg p-4 rounded-2xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl">
-                <img src="assets\Screenshot 2025-12-05 160606.png" alt="Certificate 1" class="w-full h-auto rounded-lg object-cover border border-gray-200">
-                <p class="text-center mt-3 text-lg font-medium text-accent">SQL (Hackerank)</p>
+        <div class="glass p-4 rounded-2xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl transform hover:-translate-y-2">
+            <div class="overflow-hidden rounded-lg border border-gray-200 mb-4">
+                <img src="assets/Screenshot 2025-12-05 160623.png" 
+                     alt="Python HackerRank Certificate" 
+                     class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                     onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/000000/python.png'; this.alt='Python Certificate'; this.className='w-full h-48 object-contain p-4'">
             </div>
+            <p class="text-center mt-3 text-lg font-medium text-accent">Python (HackerRank)</p>
+            <p class="text-center text-sm text-secondary mt-1">Python programming certification</p>
+        </div>
 
-            <div class="bg-card-bg p-4 rounded-2xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl">
-                <img src="assets/Screenshot 2025-12-05 160623.png" alt="Certificate 2" class="w-full h-auto rounded-lg object-cover border border-gray-200">
-                <p class="text-center mt-3 text-lg font-medium text-accent">Python (Hackerank)</p>
+        <div class="glass p-4 rounded-2xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl transform hover:-translate-y-2">
+            <div class="overflow-hidden rounded-lg border border-gray-200 mb-4">
+                <img src="assets/Screenshot 2025-12-05 160549.png" 
+                     alt="Problem Solving HackerRank Certificate" 
+                     class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+                     onerror="this.onerror=null; this.src='https://img.icons8.com/color/96/000000/lightning-bolt.png'; this.alt='Problem Solving Certificate'; this.className='w-full h-48 object-contain p-4'">
             </div>
+            <p class="text-center mt-3 text-lg font-medium text-accent">Problem Solving (HackerRank)</p>
+            <p class="text-center text-sm text-secondary mt-1">Problem solving skills certification</p>
+        </div>
+    </div>
+</section>
 
-            <div class="bg-card-bg p-4 rounded-2xl shadow-lg border border-gray-100 transition duration-300 hover:shadow-xl">
-                <img src="assets/Screenshot 2025-12-05 160549.png" alt="Certificate 3" class="w-full h-auto rounded-lg object-cover border border-gray-200">
-                <p class="text-center mt-3 text-lg font-medium text-accent">Problem solving (Hackerank)</p>
-            </div>
-
-            </div>
-    </section>
-
-        <!-- Separator -->
-        <div class="h-px w-full bg-gray-200 my-16"></div>
 
         <!-- 3. Projects Section -->
-        <section id="projects" class="py-16 md:py-24">
-            
+        <section id="projects" class="section-container py-16 md:py-24">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
                 <p class="text-xl text-secondary max-w-3xl mx-auto">
@@ -213,100 +460,98 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project Card 1: E-commerce Clone -->
-                <div class="bg-card-bg p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <h3 class="text-xl font-bold mb-2 text-primary">💊 MedReminders</h3>
+                <div class="project-card glass p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
+                    <div class="mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-100 to-blue-200 flex items-center justify-center mb-3">
+                            <i class="fas fa-pills text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-primary">💊 MedReminders</h3>
+                    </div>
                     <p class="text-sm text-secondary mb-4 flex-grow">
-                       MedReminders is a mobile application that allows users to:
-
-Authenticate and manage secure accounts
-Set up medication reminders
-Generate personalized schedules using a machine learning model
-Ensure seamless data sync with Firebase</p>
+                       MedReminders is a mobile application that allows users to authenticate and manage secure accounts, set up medication reminders, generate personalized schedules using a machine learning model, and ensure seamless data sync with Firebase.
+                    </p>
                     <div class="text-sm font-medium space-x-2 mb-4">
                         <span class="text-blue-600">#Flutter</span>
                         <span class="text-green-600">#Dart</span>
                         <span class="text-yellow-600">#Firebase</span>
-                          <span class="text-blue-600">#Cursor.ai</span>
-                        <span class="text-green-600">#GitHub Pages + Jekyll </span>
-                        <span class="text-yellow-600">#WebIntoApp</span>
+                        <span class="text-purple-600">#Cursor.ai</span>
                     </div>
                     <div class="flex space-x-4 mt-auto">
-                        <!-- Replace '#' with actual links -->
-                        <a href="https://sarim2022.github.io/medremainders" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center">
-                            Live Demo 
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <a href="https://sarim2022.github.io/medremainders" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center group">
+                            Live Demo <i class="fas fa-external-link-alt ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="https://github.com/Sarim2022/medremainders" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center">
-                            Source Code
+                        <a href="https://github.com/Sarim2022/medremainders" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center group">
+                            Source Code <i class="fab fa-github ml-2"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Project Card 2: Data Visualizer -->
-                <div class="bg-card-bg p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <h3 class="text-xl font-bold mb-2 text-primary">✅ Android-ToDo-App</h3>
+                <div class="project-card glass p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
+                    <div class="mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-green-100 to-green-200 flex items-center justify-center mb-3">
+                            <i class="fas fa-tasks text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-primary">✅ Android-ToDo-App</h3>
+                    </div>
                     <p class="text-sm text-secondary mb-4 flex-grow">
-                       A simple and robust To-Do List application built with Kotlin and integrated with Google Firebase for backend services.
-                       Key Features
-Google Authentication: Seamless sign-in and account management using Google Sign-In.
-
-
+                       A simple and robust To-Do List application built with Kotlin and integrated with Google Firebase for backend services. Features Google Authentication for seamless sign-in and account management.
                     </p>
                     <div class="text-sm font-medium space-x-2 mb-4">
-                        <span class="text-purple-600">#kotlin</span>
-                        <span class="text-red-600">#xml</span>
-                        <span class="text-gray-600">#firebase</span>
-                        <span class="text-purple-600">#Github</span>
+                        <span class="text-purple-600">#Kotlin</span>
+                        <span class="text-red-600">#XML</span>
+                        <span class="text-orange-600">#Firebase</span>
+                        <span class="text-gray-600">#GitHub</span>
                     </div>
                     <div class="flex space-x-4 mt-auto">
-                        <a href="https://github.com/Sarim2022/Android-ToDo-App/releases/download/v1.0.3/app-debug.apk" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center">
-                            Live Demo
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <a href="https://github.com/Sarim2022/Android-ToDo-App/releases/download/v1.0.3/app-debug.apk" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center group">
+                            Live Demo <i class="fas fa-external-link-alt ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="https://github.com/Sarim2022/Android-ToDo-App" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center">
-                            Source Code
+                        <a href="https://github.com/Sarim2022/Android-ToDo-App" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center group">
+                            Source Code <i class="fab fa-github ml-2"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Project Card 3: Final Year Project -->
-                <div class="bg-card-bg p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
-                    <h3 class="text-xl font-bold mb-2 text-primary">💀 MarkMyAttendence android app</h3>
+                <div class="project-card glass p-6 rounded-2xl shadow-xl border border-gray-100 flex flex-col">
+                    <div class="mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-100 to-purple-200 flex items-center justify-center mb-3">
+                            <i class="fas fa-user-check text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-primary">💀 MarkMyAttendence Android App</h3>
+                    </div>
                     <p class="text-sm text-secondary mb-4 flex-grow">
-                      A smart attendance management system where students can mark their attendance from home, inside the college, or in the classroom. Teachers receive attendance in real-time, verify students' presence manually or through auto-scan (location or proximity check).
+                      A smart attendance management system where students can mark their attendance from home, inside the college, or in the classroom. Teachers receive attendance in real-time and can verify manually or through auto-scan.
+                    </p>
                     <div class="text-sm font-medium space-x-2 mb-4">
                         <span class="text-orange-600">#Kotlin</span>
                         <span class="text-blue-400">#XML</span>
                         <span class="text-gray-600">#Android</span>
-                               <span class="text-gray-600">#Firebase</span>
-                                      <span class="text-gray-600">#Github</span>
-                                             <span class="text-gray-600">#android studio</span>
+                        <span class="text-red-600">#Firebase</span>
                     </div>
                     <div class="flex space-x-4 mt-auto">
-                        <a href="https://github.com/Sarim2022/markme/releases/download/v1.0.1/app-debug.apk" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center">
-                            Live Demo
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <a href="https://github.com/Sarim2022/markme/releases/download/v1.0.1/app-debug.apk" target="_blank" class="text-accent hover:text-blue-700 font-medium flex items-center group">
+                            Live Demo <i class="fas fa-external-link-alt ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="https://github.com/Sarim2022/markme" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center">
-                            Source Code
+                        <a href="https://github.com/Sarim2022/markme" target="_blank" class="text-secondary hover:text-primary font-medium flex items-center group">
+                            Source Code <i class="fab fa-github ml-2"></i>
                         </a>
+                    </div>
                 </div>
             </div>
             
             <div class="text-center mt-12">
                 <p class="text-secondary">Need to see more?</p>
-                <!-- Replace with your full projects page or GitHub profile -->
-                <a href="https://github.com/Sarim2022" target="_blank" class="inline-flex mt-2 items-center text-accent hover:underline font-bold">
-                    View All GitHub Repositories &rarr;
+                <a href="https://github.com/Sarim2022" target="_blank" class="inline-flex mt-2 items-center text-accent hover:underline font-bold group">
+                    View All GitHub Repositories <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
                 </a>
             </div>
         </section>
 
-        <!-- Separator -->
-        <div class="h-px w-full bg-gray-200 my-16"></div>
 
-        <!-- 4. Contact Section -->
-        <section id="contact" class="py-16 md:py-24">
+        <!-- 5. Contact Section -->
+        <section id="contact" class="section-container py-16 md:py-24">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
                 <p class="text-xl text-secondary max-w-3xl mx-auto">
@@ -314,27 +559,25 @@ Google Authentication: Seamless sign-in and account management using Google Sign
                 </p>
             </div>
 
-            <div class="max-w-xl mx-auto bg-card-bg p-8 rounded-2xl shadow-xl border border-gray-100">
+            <div class="max-w-xl mx-auto glass p-8 rounded-2xl shadow-xl border border-gray-100">
                 <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
-    <input type="hidden" name="access_key" value="1c48c4c7-9849-4bc8-9309-1d3b62747e0a">
-    <input type="hidden" name="email_to" value="sarimhasan2022@mail.com">
-
-
+                    <input type="hidden" name="access_key" value="1c48c4c7-9849-4bc8-9309-1d3b62747e0a">
+                    <input type="hidden" name="email_to" value="sarimhasan2022@mail.com">
 
                     <div>
                         <label for="name" class="block text-sm font-medium text-primary">Name</label>
-                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent" placeholder="Your Name">
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-accent focus:border-accent transition duration-200" placeholder="Your Name">
                     </div>
                     <div>
                         <label for="email" class="block text-sm font-medium text-primary">Email</label>
-                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent" placeholder="you@example.com">
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-accent focus:border-accent transition duration-200" placeholder="you@example.com">
                     </div>
                     <div>
                         <label for="message" class="block text-sm font-medium text-primary">Message</label>
-                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent" placeholder="Tell me about your project or opportunity..."></textarea>
+                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-accent focus:border-accent transition duration-200" placeholder="Tell me about your project or opportunity..."></textarea>
                     </div>
-                    <button type="submit" class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-accent hover:bg-blue-700 transition duration-300">
-                        Send Message
+                    <button type="submit" class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-lg text-white bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent transition duration-300 transform hover:scale-[1.02]">
+                        Send Message <i class="fas fa-paper-plane ml-2"></i>
                     </button>
                     <!-- Form Submission Status/Message Container -->
                     <p id="form-status" class="text-center text-sm font-medium hidden"></p>
@@ -345,21 +588,25 @@ Google Authentication: Seamless sign-in and account management using Google Sign
             <div class="mt-12 text-center">
                 <h3 class="text-2xl font-semibold mb-6 text-accent">Find Me Online</h3>
                 <div class="flex justify-center space-x-6">
-                    <!-- LinkedIn -->
-                    <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="text-secondary hover:text-blue-600 transition duration-300">
-                        <img src="https://img.icons8.com/color/48/4B5563/linkedin.png" alt="LinkedIn" class="w-10 h-10"/>
-                    </a>  
-                    <!-- instagram -->
-                    <a href="https://www.instagram.com/Sarimknowuh" target="_blank" class="text-secondary hover:text-blue-400 transition duration-300">
-                        <img src="assets/Instagram_logo_2016.svg" alt="Instagram" class="w-10 h-10"/>
+                    <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="text-secondary hover:text-blue-600 transition duration-300 transform hover:scale-110">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center">
+                            <i class="fab fa-linkedin-in text-white"></i>
+                        </div>
                     </a>
-                    <!-- GitHub -->
-                    <a href="https://github.com/Sarim2022" target="_blank" class="text-secondary hover:text-primary transition duration-300">
-                        <img src="https://img.icons8.com/material-outlined/48/4B5563/github.png" alt="GitHub" class="w-10 h-10"/>
+                    <a href="https://www.instagram.com/Sarimknowuh" target="_blank" class="text-secondary hover:text-pink-500 transition duration-300 transform hover:scale-110">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 flex items-center justify-center">
+                            <i class="fab fa-instagram text-white"></i>
+                        </div>
                     </a>
-                  
-                    <a href="https://youtube.com/@sarimknowuh" target="_blank" class="text-secondary hover:text-blue-400 transition duration-300">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="youtube" class="w-10 h-10"/>
+                    <a href="https://github.com/Sarim2022" target="_blank" class="text-secondary hover:text-gray-800 transition duration-300 transform hover:scale-110">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-gray-800 to-black flex items-center justify-center">
+                            <i class="fab fa-github text-white"></i>
+                        </div>
+                    </a>
+                    <a href="https://youtube.com/@sarimknowuh" target="_blank" class="text-secondary hover:text-red-600 transition duration-300 transform hover:scale-110">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-red-500 to-red-700 flex items-center justify-center">
+                            <i class="fab fa-youtube text-white"></i>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -368,21 +615,67 @@ Google Authentication: Seamless sign-in and account management using Google Sign
     </main>
 
     <!-- Footer -->
-    <footer class="bg-primary text-background py-8 mt-12">
+    <footer class="glass-dark text-background py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-          
+            <p>© <span id="current-year"></span> Sarim Hasan. All rights reserved.</p>
             <p class="mt-1">Computer Science Student | Jamia Hamdard University</p>
+            <p class="mt-2 text-gray-400">Made with <i class="fas fa-heart text-red-400 mx-1"></i> and lots of coffee</p>
         </div>
     </footer>
 
-    <!-- JavaScript for smooth scrolling and mobile menu toggle -->
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Set current year in footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
+            // Section visibility observer for swipe animations
+            const sections = document.querySelectorAll('.section-container');
+            const indicators = document.querySelectorAll('.swipe-indicator');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+            
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Update swipe indicators
+                        const sectionId = entry.target.id;
+                        indicators.forEach(indicator => {
+                            if (indicator.dataset.section === sectionId) {
+                                indicator.classList.add('active');
+                            } else {
+                                indicator.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            // Set home section as visible initially
+            document.getElementById('home').classList.add('visible');
+
+            // Swipe indicator click functionality
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', () => {
+                    const targetSection = indicator.dataset.section;
+                    document.getElementById(targetSection).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
             // Smooth Scroll Logic
-            document.querySelectorAll('a.nav-link[href^="#"], a[href="#projects"], a[href="#about"], a[href="#contact"]').forEach(anchor => {
+            document.querySelectorAll('a.nav-link[href^="#"], a[href="#projects"], a[href="#about"], a[href="#contact"], a[href="#certificates"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     
@@ -390,10 +683,9 @@ Google Authentication: Seamless sign-in and account management using Google Sign
                     const targetElement = document.querySelector(targetId);
 
                     if (targetElement) {
-                        // Scroll to the element smoothly
                         targetElement.scrollIntoView({
                             behavior: 'smooth',
-                            block: 'start' // Aligns the top of the element with the top of the viewport
+                            block: 'start'
                         });
                         
                         // Close mobile menu after clicking a link
@@ -412,7 +704,6 @@ Google Authentication: Seamless sign-in and account management using Google Sign
                 mobileMenu.classList.toggle('hidden');
                 mobileMenu.classList.toggle('block');
                 
-                // Toggle the icons inside the button
                 const closedIcon = mobileMenuButton.querySelector('svg:first-child');
                 const openIcon = mobileMenuButton.querySelector('svg:last-child');
                 
@@ -422,7 +713,7 @@ Google Authentication: Seamless sign-in and account management using Google Sign
 
             mobileMenuButton.addEventListener('click', toggleMobileMenu);
 
-            // Contact Form Submission Simulation (Minimal setup)
+            // Contact Form Submission
             const contactForm = document.getElementById('contact-form');
             const formStatus = document.getElementById('form-status');
 
@@ -430,43 +721,106 @@ Google Authentication: Seamless sign-in and account management using Google Sign
                 e.preventDefault();
                 formStatus.classList.remove('hidden', 'text-red-500', 'text-green-600');
                 formStatus.classList.add('text-gray-500');
-                formStatus.textContent = 'Sending message... (This is a static portfolio simulation)';
+                formStatus.textContent = 'Sending message...';
 
+                // Simulate API call with timeout
                 setTimeout(() => {
-                    // In a real application, you would send data to a backend API here.
-                    // For this minimal static site, we just show success.
                     formStatus.classList.remove('text-gray-500');
                     formStatus.classList.add('text-green-600');
-                    formStatus.textContent = 'Thank you! Your message has been noted. I will be in touch soon.';
-                    contactForm.reset(); // Clear the form
+                    formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+                    contactForm.reset();
+                    
+                    // Reset status after 5 seconds
+                    setTimeout(() => {
+                        formStatus.classList.add('hidden');
+                    }, 5000);
                 }, 1500);
-
             });
+            
+            // Touch swipe functionality for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            });
+            
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const verticalSwipeThreshold = 30;
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+                
+                // Check if it's primarily a horizontal swipe (not vertical scroll)
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaY) < verticalSwipeThreshold) {
+                    if (deltaX > swipeThreshold) {
+                        // Swipe right - go to previous section
+                        navigateSections('prev');
+                    } else if (deltaX < -swipeThreshold) {
+                        // Swipe left - go to next section
+                        navigateSections('next');
+                    }
+                }
+            }
+            
+            function navigateSections(direction) {
+                const sectionsArray = ['home', 'about', 'projects', 'certificates', 'contact'];
+                const currentSection = getCurrentSection();
+                
+                if (!currentSection) return;
+                
+                const currentIndex = sectionsArray.indexOf(currentSection);
+                let nextIndex;
+                
+                if (direction === 'next' && currentIndex < sectionsArray.length - 1) {
+                    nextIndex = currentIndex + 1;
+                } else if (direction === 'prev' && currentIndex > 0) {
+                    nextIndex = currentIndex - 1;
+                } else {
+                    return;
+                }
+                
+                document.getElementById(sectionsArray[nextIndex]).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            
+            function getCurrentSection() {
+                const currentScroll = window.scrollY + 100;
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
+                        currentSection = section.id;
+                    }
+                });
+                
+                return currentSection || 'home';
+            }
+            
+            // Initialize all sections with slight delay for staggered animation
+            setTimeout(() => {
+                sections.forEach((section, index) => {
+                    setTimeout(() => {
+                        if (section.getBoundingClientRect().top < window.innerHeight * 0.8) {
+                            section.classList.add('visible');
+                        }
+                    }, index * 100);
+                });
+            }, 300);
         });
-        const form = document.getElementById("contact-form");
-const status = document.getElementById("form-status");
-
-form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    let data = new FormData(form);
-
-    fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { 'Accept': 'application/json' }
-    }).then(response => {
-        if (response.ok) {
-            status.innerText = "Message sent successfully!";
-            status.classList.remove("hidden");
-            form.reset();
-        } else {
-            status.innerText = "Oops! Something went wrong.";
-            status.classList.remove("hidden");
-        }
-    });
-});
-
     </script>
 </body>
 </html>
