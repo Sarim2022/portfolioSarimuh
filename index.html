@@ -587,6 +587,7 @@
             <!-- Social Media & Profile Links -->
             <div class="mt-12 text-center">
                 <h3 class="text-2xl font-semibold mb-6 text-accent">Find Me Online</h3>
+                
                 <div class="flex justify-center space-x-6">
                     <a href="https://www.linkedin.com/in/sarimhasanProfes67" target="_blank" class="text-secondary hover:text-blue-600 transition duration-300 transform hover:scale-110">
                         <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center">
@@ -822,5 +823,64 @@
             }, 300);
         });
     </script>
+    <!-- View Counter with localStorage -->
+<div class="fixed bottom-4 left-4 z-40 glass px-4 py-2 rounded-xl shadow-lg text-sm flex items-center gap-2 backdrop-blur-sm">
+    <div class="relative">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-r from-accent to-purple-500 flex items-center justify-center">
+            <i class="fas fa-eye text-white text-xs"></i>
+        </div>
+        <div class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping opacity-75"></div>
+    </div>
+    <div>
+        <p class="font-medium text-primary">
+            <span id="view-count-simple">0</span> views
+        </p>
+        <p class="text-xs text-secondary">Unique visitors</p>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Use localStorage for unique daily counting
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const key = `portfolio_views_${today}`;
+    
+    // Get today's views
+    let todayViews = parseInt(localStorage.getItem(key)) || 0;
+    
+    // Check if already visited today
+    const sessionKey = `visited_${today}`;
+    if (!sessionStorage.getItem(sessionKey)) {
+        // New visit today
+        todayViews += 1;
+        localStorage.setItem(key, todayViews);
+        sessionStorage.setItem(sessionKey, 'true');
+    }
+    
+    // Calculate total views (from all days)
+    let totalViews = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+        const storageKey = localStorage.key(i);
+        if (storageKey.startsWith('portfolio_views_')) {
+            totalViews += parseInt(localStorage.getItem(storageKey));
+        }
+    }
+    
+    // Animate the counter
+    const counterElement = document.getElementById('view-count-simple');
+    let displayCount = 0;
+    const increment = Math.ceil(totalViews / 30); // 30 steps
+    
+    const counterInterval = setInterval(() => {
+        if (displayCount < totalViews) {
+            displayCount += increment;
+            if (displayCount > totalViews) displayCount = totalViews;
+            counterElement.textContent = displayCount;
+        } else {
+            clearInterval(counterInterval);
+        }
+    }, 50);
+});
+</script>
 </body>
 </html>
