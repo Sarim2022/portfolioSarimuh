@@ -3,419 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarim | Brain Map Portfolio</title>
+    <title>Sarim | Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="brain-container" id="brainContainer">
-        <!-- Background ambient particles -->
-        <div class="ambient-particles" id="ambientParticles"></div>
-        
-        <!-- SVG Connection Lines -->
-        <svg class="connections-layer" id="connectionsLayer">
-            <defs>
-                <linearGradient id="signalGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:0" />
-                    <stop offset="50%" style="stop-color:#00f5ff;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#00f5ff;stop-opacity:0" />
-                </linearGradient>
-                <filter id="glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </defs>
-            <!-- Connection lines will be drawn by JS -->
-        </svg>
-
-        <!-- Neural Nodes -->
-        <nav class="neural-network" id="neuralNetwork">
-            <!-- Core Node - Central Identity -->
-            <button class="neural-node core-node" data-node="core" aria-label="Core Identity">
-                <div class="node-ring"></div>
-                <div class="node-ring ring-2"></div>
-                <div class="node-ring ring-3"></div>
-                <div class="node-inner">
-                    <span class="node-icon">◉</span>
-                </div>
-                <span class="node-label">Me</span>
-            </button>
-
-            <!-- Surrounding Nodes -->
-            <button class="neural-node satellite-node" data-node="skills" aria-label="Skills">
-                <div class="node-ring"></div>
-                <div class="node-inner">
-                    <span class="node-icon">⚡</span>
-                </div>
-                <span class="node-label">Skills</span>
-            </button>
-
-            <button class="neural-node satellite-node" data-node="projects" aria-label="Projects">
-                <div class="node-ring"></div>
-                <div class="node-inner">
-                    <span class="node-icon">◈</span>
-                </div>
-                <span class="node-label">Projects</span>
-            </button>
-
-            <button class="neural-node satellite-node" data-node="experience" aria-label="Experience">
-                <div class="node-ring"></div>
-                <div class="node-inner">
-                    <span class="node-icon">◐</span>
-                </div>
-                <span class="node-label">Experience</span>
-            </button>
-
-            <button class="neural-node satellite-node" data-node="learning" aria-label="Learning">
-                <div class="node-ring"></div>
-                <div class="node-inner">
-                    <span class="node-icon">◎</span>
-                </div>
-                <span class="node-label">Learning</span>
-            </button>
-
-            <button class="neural-node satellite-node" data-node="interests" aria-label="Interests">
-                <div class="node-ring"></div>
-                <div class="node-inner">
-                    <span class="node-icon">✧</span>
-                </div>
-                <span class="node-label">Interests</span>
-            </button>
-
-            <button class="neural-node satellite-node" data-node="contact" aria-label="Contact">
-                <div class="node-ring"></div>
-                <div class="node-inner">
-                    <span class="node-icon">◇</span>
-                </div>
-                <span class="node-label">Contact</span>
-            </button>
+    <!-- Navigation -->
+    <header class="nav-header">
+        <a href="#" class="nav-logo">Sarim Hasan</a>
+        <nav class="nav-links">
+            <a href="#intro">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+            <!-- Social Icons -->
+            <div class="nav-social">
+                <a href="mailto:sarimhasan2022@gmail.com" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/Sarim2022" target="_blank" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                        <path d="M9 18c-4.51 2-5-2-7-2"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect width="4" height="12" x="2" y="9"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+                <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" aria-label="LeetCode">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m16 18 6-6-6-6"/>
+                        <path d="m8 6-6 6 6 6"/>
+                    </svg>
+                </a>
+            </div>
         </nav>
+        <!-- Mobile Menu Toggle -->
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
 
-        <!-- Content Panels -->
-        <section class="content-panel" id="panel-core" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">◉</span>
-                    Core Identity
-                </h2>
-                <div class="panel-body">
-                    <div class="identity-header">
-                        <h3 class="identity-name">Sarim</h3>
-                        <span class="identity-role">Android Developer</span>
+    <!-- Hero Section - Blue Background -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-image">
+                <img src="profilePic.jpeg" alt="Sarim Hasan" class="profile-img">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Android Developer and Computer Science student at Jamia Hamdard University with career interests in mobile development, AI, and innovative technology.
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section - White Background -->
+    <section class="intro-section" id="intro">
+        <div class="intro-container">
+            <div class="intro-label">
+                <span class="label-line"></span>
+                <span class="label-text">Intro</span>
+            </div>
+            <div class="intro-content">
+                <p class="intro-text">
+                    I am a passionate Android developer pursuing my B.Tech in Computer Science at Jamia Hamdard University, New Delhi. My journey in technology has been defined by a constant drive to build solutions that solve real-world problems. Currently interning at Paytm as an Android Developer, I am enhancing app UI and integrating backend APIs to improve user experience and payment functionalities. Beyond mobile development, I am deeply interested in Machine Learning and Artificial Intelligence, continuously expanding my skill set to stay at the forefront of technological innovation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience-section" id="experience">
+        <div class="section-container">
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">Experience</span>
+            </div>
+            <div class="section-content">
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Android Developer Intern</h3>
+                        <span class="experience-company">Paytm</span>
                     </div>
-                    <p class="identity-bio">
-                        Passionate Android developer and Computer Science student crafting innovative mobile solutions.
-                    </p>
-                    <div class="philosophy-block">
-                        <span class="philosophy-label">Philosophy</span>
-                        <p>Building mobile applications that solve real-world problems and enhance user experiences.</p>
+                    <span class="experience-date">July 2025 - Jan 2026</span>
+                    <p class="experience-desc">Improving Android app UI and integrating backend APIs to enhance user experience and payment functionalities.</p>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">B.Tech in Computer Science</h3>
+                        <span class="experience-company">Jamia Hamdard University, New Delhi</span>
                     </div>
-                    <div class="mindset-block">
-                        <span class="mindset-label">Mindset</span>
-                        <p>Always learning, always building, always improving.</p>
+                    <span class="experience-date">2022 - Present</span>
+                    <p class="experience-desc">CGPA (until 6th sem): 7.18</p>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Google Cloud Arcade Facilitator</h3>
+                        <span class="experience-company">Google Cloud</span>
                     </div>
-                    <div class="status-indicator">
-                        <span class="status-dot"></span>
-                        <span>Available for opportunities</span>
-                    </div>
+                    <span class="experience-date">2025</span>
+                    <p class="experience-desc">Earned 50+ badges and won exclusive swag through the C1 program.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="content-panel" id="panel-skills" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">⚡</span>
-                    Skills Stack
-                </h2>
-                <div class="panel-body">
-                    <div class="skill-category">
-                        <h4 class="skill-category-title">Languages / Core</h4>
-                        <div class="skill-bubbles">
-                            <span class="skill-bubble">Java</span>
-                            <span class="skill-bubble">Python</span>
-                            <span class="skill-bubble">Kotlin</span>
-                            <span class="skill-bubble">JavaScript</span>
-                            <span class="skill-bubble">SQL</span>
-                            <span class="skill-bubble">HTML</span>
-                            <span class="skill-bubble">CSS</span>
-                            <span class="skill-bubble">XML</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h4 class="skill-category-title">Technologies & Concepts</h4>
-                        <div class="skill-bubbles">
-                            <span class="skill-bubble accent">Data Structures</span>
-                            <span class="skill-bubble accent">Algorithms</span>
-                            <span class="skill-bubble accent">REST APIs</span>
-                            <span class="skill-bubble accent">Firebase</span>
-                            <span class="skill-bubble accent">Machine Learning</span>
-                            <span class="skill-bubble accent">Android SDK</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects">
+        <div class="section-container">
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">Projects</span>
             </div>
-        </section>
-
-        <section class="content-panel" id="panel-projects" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">◈</span>
-                    Projects
-                </h2>
-                <div class="panel-body projects-grid">
+            <div class="section-content">
+                <div class="projects-grid">
                     <article class="project-card">
                         <h4 class="project-name">MedReminders App</h4>
                         <p class="project-desc">Mobile app for medicine intake alerts and health tracking with intelligent reminders.</p>
-                        <div class="project-tech">Flutter • ML • Firebase</div>
+                        <span class="project-tech">Flutter • ML • Firebase</span>
                         <a href="https://sarim2022.github.io/medremainders/" target="_blank" class="project-link">View Project →</a>
                     </article>
                     <article class="project-card">
                         <h4 class="project-name">Android ToDo App</h4>
                         <p class="project-desc">Comprehensive task management with intuitive UI and seamless data sync.</p>
-                        <div class="project-tech">Kotlin • Java • Firebase</div>
+                        <span class="project-tech">Kotlin • Java • Firebase</span>
                         <a href="https://sarim2022.github.io/Android-ToDo-App/" target="_blank" class="project-link">View Project →</a>
                     </article>
                     <article class="project-card">
                         <h4 class="project-name">MarkMyAttendance</h4>
                         <p class="project-desc">Digital attendance system for students with secure login and real-time tracking.</p>
-                        <div class="project-tech">Android • Kotlin • Firebase</div>
+                        <span class="project-tech">Android • Kotlin • Firebase</span>
                         <a href="https://sarim2022.github.io/markmyattendance/" target="_blank" class="project-link">View Project →</a>
                     </article>
                     <article class="project-card">
                         <h4 class="project-name">MiniChatBot</h4>
                         <p class="project-desc">Terminal-themed chatbot with interactive command-based interface.</p>
-                        <div class="project-tech">HTML • CSS • JavaScript</div>
+                        <span class="project-tech">HTML • CSS • JavaScript</span>
                         <a href="https://sarim2022.github.io/minichatbot/" target="_blank" class="project-link">View Project →</a>
                     </article>
                     <article class="project-card">
                         <h4 class="project-name">Crackerscode</h4>
                         <p class="project-desc">Password generator and strength checker for creating secure passwords.</p>
-                        <div class="project-tech">JavaScript • HTML • CSS</div>
+                        <span class="project-tech">JavaScript • HTML • CSS</span>
                         <a href="https://sarim2022.github.io/Crackerscode/" target="_blank" class="project-link">View Project →</a>
                     </article>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="content-panel" id="panel-experience" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">◐</span>
-                    Experience & Education
-                </h2>
-                <div class="panel-body">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-marker work"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">July 2025 - Jan 2026</span>
-                                <h4 class="timeline-title">Android Developer Intern</h4>
-                                <span class="timeline-company">Paytm</span>
-                                <p class="timeline-desc">Improving Android app UI and integrating backend APIs to enhance user experience and payment functionalities.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker education"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">2022 - Present</span>
-                                <h4 class="timeline-title">B.Tech in Computer Science</h4>
-                                <span class="timeline-company">Jamia Hamdard University, New Delhi</span>
-                                <p class="timeline-desc">CGPA (until 6th sem): 7.18</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker achievement"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">2025</span>
-                                <h4 class="timeline-title">Google Cloud Arcade Facilitator</h4>
-                                <span class="timeline-company">Google Cloud</span>
-                                <p class="timeline-desc">Earned 50+ badges and won exclusive swag through the C1 program.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+        <div class="section-container">
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">Skills</span>
             </div>
-        </section>
-
-        <section class="content-panel" id="panel-learning" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">◎</span>
-                    Currently Learning
-                </h2>
-                <div class="panel-body">
-                    <div class="learning-stack">
-                        <div class="learning-item">
-                            <div class="learning-icon">🤖</div>
-                            <div class="learning-info">
-                                <h4>Machine Learning</h4>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 60%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="learning-item">
-                            <div class="learning-icon">🧠</div>
-                            <div class="learning-info">
-                                <h4>Artificial Intelligence</h4>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 45%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="learning-item">
-                            <div class="learning-icon">📱</div>
-                            <div class="learning-info">
-                                <h4>Advanced Android Development</h4>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 75%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="learning-item">
-                            <div class="learning-icon">🔌</div>
-                            <div class="learning-info">
-                                <h4>REST APIs</h4>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 70%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="learning-item">
-                            <div class="learning-icon">⚡</div>
-                            <div class="learning-info">
-                                <h4>JavaScript Ecosystem</h4>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 40%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="certificates-section">
-                        <h4 class="certificates-title">Certificates</h4>
-                        <ul class="certificates-list">
-                            <li>Python Certificate — HackerRank</li>
-                            <li>Problem Solving (Basic) — HackerRank</li>
-                            <li>MySQL Certificate</li>
-                        </ul>
+            <div class="section-content">
+                <div class="skills-category">
+                    <h4 class="skills-title">Languages</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Kotlin</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">XML</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="content-panel" id="panel-interests" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">✧</span>
-                    Interests
-                </h2>
-                <div class="panel-body">
-                    <div class="interests-grid">
-                        <div class="interest-card">
-                            <span class="interest-emoji">🎮</span>
-                            <span class="interest-name">Games</span>
-                        </div>
-                        <div class="interest-card">
-                            <span class="interest-emoji">💻</span>
-                            <span class="interest-name">Coding</span>
-                        </div>
-                        <div class="interest-card">
-                            <span class="interest-emoji">🧩</span>
-                            <span class="interest-name">Problem Solving</span>
-                        </div>
-                        <div class="interest-card">
-                            <span class="interest-emoji">✈️</span>
-                            <span class="interest-name">Travelling</span>
-                        </div>
-                    </div>
-                    <div class="coding-profiles">
-                        <h4>Coding Profiles</h4>
-                        <div class="profile-stats">
-                            <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" class="profile-stat">
-                                <span class="stat-value">140+</span>
-                                <span class="stat-label">LeetCode Problems</span>
-                            </a>
-                        </div>
+                <div class="skills-category">
+                    <h4 class="skills-title">Technologies & Concepts</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag">Data Structures</span>
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Android SDK</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="content-panel" id="panel-contact" aria-hidden="true">
-            <button class="panel-close" aria-label="Close panel">×</button>
-            <div class="panel-content">
-                <h2 class="panel-title">
-                    <span class="title-icon">◇</span>
-                    Contact
-                </h2>
-                <div class="panel-body">
-                    <div class="contact-links">
-                        <a href="mailto:sarimhasan2022@gmail.com" class="contact-item">
-                            <span class="contact-icon">✉</span>
-                            <span class="contact-text">sarimhasan2022@gmail.com</span>
-                        </a>
-                        <a href="https://github.com/Sarim2022" target="_blank" class="contact-item">
-                            <span class="contact-icon">⌘</span>
-                            <span class="contact-text">GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" class="contact-item">
-                            <span class="contact-icon">◫</span>
-                            <span class="contact-text">LinkedIn</span>
-                        </a>
-                        <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" class="contact-item">
-                            <span class="contact-icon">◈</span>
-                            <span class="contact-text">LeetCode</span>
-                        </a>
-                        <a href="https://geeksforgeeks.org/profile/sarimhasowyc" target="_blank" class="contact-item">
-                            <span class="contact-icon">◉</span>
-                            <span class="contact-text">GeeksforGeeks</span>
-                        </a>
-                    </div>
-                    <div class="resume-section">
-                        <a href="https://drive.google.com/file/d/1HWwIVd8mFQcgt25BHkRGbvQkIW8Ds4a3/view" target="_blank" class="resume-btn view">
-                            View Resume
-                        </a>
-                        <a href="https://drive.google.com/uc?export=download&id=1HWwIVd8mFQcgt25BHkRGbvQkIW8Ds4a3" class="resume-btn download">
-                            Download Resume
-                        </a>
-                    </div>
-                    <div class="location-info">
-                        <span class="location-icon">◎</span>
-                        <span>New Delhi, India</span>
+                <div class="skills-category">
+                    <h4 class="skills-title">Currently Learning</h4>
+                    <div class="skills-list">
+                        <span class="skill-tag learning">Machine Learning</span>
+                        <span class="skill-tag learning">Artificial Intelligence</span>
+                        <span class="skill-tag learning">Advanced Android</span>
+                        <span class="skill-tag learning">REST APIs</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Intro Overlay -->
-        <div class="intro-overlay" id="introOverlay">
-            <div class="intro-content">
-                <div class="intro-brain">
-                    <div class="intro-pulse"></div>
-                    <span class="intro-icon">◉</span>
-                </div>
-                <h1 class="intro-title">Initializing Neural Network...</h1>
-                <p class="intro-subtitle">Mapping Developer Mind</p>
             </div>
         </div>
+    </section>
 
-        <!-- Instruction hint -->
-        <div class="instruction-hint" id="instructionHint">
-            <span>Click any node to explore</span>
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="section-container">
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">Contact</span>
+            </div>
+            <div class="section-content">
+                <div class="contact-grid">
+                    <a href="mailto:sarimhasan2022@gmail.com" class="contact-card">
+                        <span class="contact-icon">✉</span>
+                        <span class="contact-info">sarimhasan2022@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/Sarim2022" target="_blank" class="contact-card">
+                        <span class="contact-icon">⌘</span>
+                        <span class="contact-info">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" class="contact-card">
+                        <span class="contact-icon">◫</span>
+                        <span class="contact-info">LinkedIn</span>
+                    </a>
+                    <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" class="contact-card">
+                        <span class="contact-icon">◈</span>
+                        <span class="contact-info">LeetCode (140+ Problems)</span>
+                    </a>
+                </div>
+                <div class="resume-buttons">
+                    <a href="https://drive.google.com/file/d/1HWwIVd8mFQcgt25BHkRGbvQkIW8Ds4a3/view" target="_blank" class="btn btn-outline">View Resume</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1HWwIVd8mFQcgt25BHkRGbvQkIW8Ds4a3" class="btn btn-primary">Download Resume</a>
+                </div>
+                <p class="location">📍 New Delhi, India</p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Sarim Hasan. Available for opportunities.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
