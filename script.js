@@ -1,423 +1,505 @@
-// Terminal Portfolio - Vanilla JavaScript
-// Command system and interaction logic
+/**
+ * Brain Map Developer Portfolio
+ * Interactive neural network visualization
+ * 
+ * State-driven architecture with CSS-first animations
+ */
 
-const terminalOutput = document.getElementById('terminalOutput');
-const terminalInput = document.getElementById('terminalInput');
-const cursor = document.getElementById('cursor');
+// ============================================
+// State Manager
+// ============================================
+const BrainState = {
+    activeNode: null,
+    activePanel: null,
+    isAnimating: false,
+    isIntroComplete: false,
+    nodes: {},
+    connections: []
+};
 
-let commandHistory = [];
-let historyIndex = -1;
-let isTyping = false;
-
-// Portfolio data
-const portfolioData = {
-    about: {
-        name: "Sarim",
-        role: "Android Developer",
-        bio: "Passionate Android developer and Computer Science student crafting innovative mobile solutions.",
-        passion: "Building mobile applications that solve real-world problems and enhance user experiences.",
-        mindset: "Always learning, always building, always improving."
-    },
-    skills: {
-        "Languages/Core": ["Java", "Python", "CSS", "HTML", "SQL", "Kotlin", "XML", "JavaScript (Beginner)"],
-        "Other": ["Data Structures & Algorithms", "REST APIs", "Machine Learning", "Artificial Intelligence (Beginner)"]
-    },
-    projects: {
-        "medremainders": {
-            name: "MedRemainders App",
-            description: "A mobile app to alert users for medicine intake and track health routines. Features intelligent reminders and health tracking capabilities.",
-            tech: "Flutter, Machine Learning, Firebase",
-            livePreview: "https://sarim2022.github.io/medremainders/"
-        },
-        "android-todo": {
-            name: "Android-ToDo-App",
-            description: "A comprehensive task-management app with intuitive UI and seamless data synchronization.",
-            tech: "Kotlin, XML, Java, Android tools, Firebase, Github",
-            livePreview: "https://sarim2022.github.io/Android-ToDo-App/"
-        },
-        "markmyattendance": {
-            name: "MarkMyAttendence",
-            description: "A digital attendance system for college students with secure login and real-time record tracking. Streamlines attendance management for educational institutions.",
-            tech: "Android, Kotlin, Firebase",
-            livePreview: "https://sarim2022.github.io/markmyattendance/"
-        },
-        "minichatbot": {
-            name: "MiniChatBot",
-            description: "A terminal theme chatbot with basic features built using HTML, CSS, and JavaScript. Interactive command-based interface with modern dark theme.",
-            tech: "HTML, CSS, JavaScript",
-            livePreview: "https://sarim2022.github.io/minichatbot/"
-        },
-        "crackerscode": {
-            name: "Crackerscode",
-            description: "A password generator and checker with functional design built in JavaScript. Helps users create secure passwords and verify password strength.",
-            tech: "JavaScript, HTML, CSS",
-            livePreview: "https://sarim2022.github.io/Crackerscode/"
-        }
-    },
-    education: [
-        {
-            degree: "Bachelor of Technology",
-            field: "Computer Science & Engineering",
-            institution: "Jamia Hamdard University, New Delhi",
-            year: "09/2022 - Present",
-            cgpa: "CGPA (until 6th sem): 7.18"
-        },
-        {
-            degree: "Schooling",
-            field: "CBSE Board",
-            institution: "Victoria Modern Public School",
-            year: "2022 (CBSE): 62% | 2020: 68%"
-        }
-    ],
-    experience: [
-        {
-            role: "Android Developer Intern",
-            company: "Paytm",
-            duration: "July 2025 - Jan 2026",
-            description: "Improving the Android app's UI and integrating backend APIs to enhance user experience and payment functionalities."
-        }
-    ],
-    learning: [
-        "Machine Learning",
-        "Artificial Intelligence",
-        "Advanced Android Development",
-        "REST APIs",
-        "JavaScript"
-    ],
-    interests: [
-        "Games",
-        "Coding",
-        "Problem Solving",
-        "Travelling"
-    ],
-    contact: {
-        email: "sarimhasan2022@gmail.com",
-        phone: "8448048903",
-        location: "New Delhi, India",
-        github: "https://github.com/Sarim2022",
-        leetcode: "https://leetcode.com/u/sarimhasan2022/",
-        leetcodeStats: "140+ problems solved",
-        linkedin: "https://www.linkedin.com/in/sarimhasanprofes67?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-        geeksforgeeks: "https://geeksforgeeks.org/profile/sarimhasowyc"
-    },
-    certificates: [
-        "Python certificate from HackerRank",
-        "Problem solving (Basic) certificate",
-        "MySQL certificate"
-    ],
-    achievements: [
-        "Google Cloud Arcade Facilitator Program (2025 C1) — earned 50+ badges and won exclusive swag"
-    ],
-    resume: {
-        view: "https://drive.google.com/file/d/1HWwIVd8mFQcgt25BHkRGbvQkIW8Ds4a3/view",
-        download: "https://drive.google.com/uc?export=download&id=1HWwIVd8mFQcgt25BHkRGbvQkIW8Ds4a3"
+// ============================================
+// DOM Elements
+// ============================================
+const DOM = {
+    container: null,
+    network: null,
+    connectionsLayer: null,
+    nodes: null,
+    panels: null,
+    introOverlay: null,
+    instructionHint: null,
+    ambientParticles: null,
+    
+    init() {
+        this.container = document.getElementById('brainContainer');
+        this.network = document.getElementById('neuralNetwork');
+        this.connectionsLayer = document.getElementById('connectionsLayer');
+        this.nodes = document.querySelectorAll('.neural-node');
+        this.panels = document.querySelectorAll('.content-panel');
+        this.introOverlay = document.getElementById('introOverlay');
+        this.instructionHint = document.getElementById('instructionHint');
+        this.ambientParticles = document.getElementById('ambientParticles');
     }
 };
 
-// Initialize terminal
-function initTerminal() {
-    setTimeout(() => {
-        showHelp();
-    }, 1500);
-}
-
-// Add output line with typing animation
-function addOutputLine(text, className = "", delay = 0) {
-    if (isTyping) {
-        setTimeout(() => addOutputLine(text, className, delay), 100);
-        return;
-    }
-
-    isTyping = true;
-    const line = document.createElement('div');
-    line.className = 'output-line typing-animation';
+// ============================================
+// Utility Functions
+// ============================================
+const Utils = {
+    // Get center position of an element
+    getNodeCenter(node) {
+        const rect = node.getBoundingClientRect();
+        return {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+        };
+    },
     
-    setTimeout(() => {
-        if (className) {
-            const span = document.createElement('span');
-            span.className = className;
-            span.textContent = text;
-            line.appendChild(span);
-        } else {
-            line.innerHTML = text;
+    // Debounce function for performance
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    },
+    
+    // Check if device is touch-enabled
+    isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    }
+};
+
+// ============================================
+// Connection Lines Manager
+// ============================================
+const ConnectionManager = {
+    lines: [],
+    signals: [],
+    
+    init() {
+        this.drawConnections();
+        window.addEventListener('resize', Utils.debounce(() => this.drawConnections(), 250));
+    },
+    
+    drawConnections() {
+        // Clear existing connections
+        const existingLines = DOM.connectionsLayer.querySelectorAll('.connection-line, .signal-pulse');
+        existingLines.forEach(line => line.remove());
+        
+        this.lines = [];
+        this.signals = [];
+        
+        const coreNode = document.querySelector('.core-node');
+        const satelliteNodes = document.querySelectorAll('.satellite-node');
+        
+        if (!coreNode) return;
+        
+        const coreCenter = Utils.getNodeCenter(coreNode);
+        
+        satelliteNodes.forEach((satellite, index) => {
+            const satelliteCenter = Utils.getNodeCenter(satellite);
+            const nodeId = satellite.dataset.node;
+            
+            // Create connection line
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('class', 'connection-line');
+            line.setAttribute('data-target', nodeId);
+            line.setAttribute('x1', coreCenter.x);
+            line.setAttribute('y1', coreCenter.y);
+            line.setAttribute('x2', satelliteCenter.x);
+            line.setAttribute('y2', satelliteCenter.y);
+            
+            DOM.connectionsLayer.appendChild(line);
+            this.lines.push(line);
+            
+            // Create signal pulse line
+            const signal = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            signal.setAttribute('class', 'signal-pulse');
+            signal.setAttribute('data-target', nodeId);
+            signal.setAttribute('x1', coreCenter.x);
+            signal.setAttribute('y1', coreCenter.y);
+            signal.setAttribute('x2', satelliteCenter.x);
+            signal.setAttribute('y2', satelliteCenter.y);
+            
+            // Calculate line length for dash animation
+            const length = Math.sqrt(
+                Math.pow(satelliteCenter.x - coreCenter.x, 2) + 
+                Math.pow(satelliteCenter.y - coreCenter.y, 2)
+            );
+            signal.style.strokeDasharray = `${length * 0.2} ${length}`;
+            signal.style.strokeDashoffset = length;
+            
+            DOM.connectionsLayer.appendChild(signal);
+            this.signals.push(signal);
+        });
+    },
+    
+    activateConnection(nodeId) {
+        // Activate the connection line
+        this.lines.forEach(line => {
+            if (line.getAttribute('data-target') === nodeId) {
+                line.classList.add('active');
+            } else {
+                line.classList.remove('active');
+            }
+        });
+        
+        // Trigger signal animation
+        this.signals.forEach(signal => {
+            signal.classList.remove('animate');
+            if (signal.getAttribute('data-target') === nodeId) {
+                // Force reflow to restart animation
+                void signal.offsetWidth;
+                signal.classList.add('animate');
+            }
+        });
+    },
+    
+    deactivateAll() {
+        this.lines.forEach(line => line.classList.remove('active'));
+        this.signals.forEach(signal => signal.classList.remove('animate'));
+    }
+};
+
+// ============================================
+// Node Interaction Manager
+// ============================================
+const NodeManager = {
+    init() {
+        DOM.nodes.forEach(node => {
+            // Click handler
+            node.addEventListener('click', (e) => this.handleNodeClick(e, node));
+            
+            // Hover handlers for desktop
+            if (!Utils.isTouchDevice()) {
+                node.addEventListener('mouseenter', () => this.handleNodeHover(node, true));
+                node.addEventListener('mouseleave', () => this.handleNodeHover(node, false));
+            }
+        });
+    },
+    
+    handleNodeClick(e, node) {
+        e.preventDefault();
+        
+        if (BrainState.isAnimating) return;
+        
+        const nodeId = node.dataset.node;
+        
+        // If clicking the same node, close it
+        if (BrainState.activeNode === nodeId) {
+            this.deactivateNode();
+            return;
         }
         
-        terminalOutput.appendChild(line);
-        scrollToBottom();
-        isTyping = false;
-    }, delay);
-}
-
-// Scroll to bottom
-function scrollToBottom() {
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-}
-
-// Process commands
-window.processCommand = function(input) {
-    const command = input.trim().toLowerCase();
-    const parts = command.split(' ');
-    const cmd = parts[0];
-    const args = parts.slice(1).join(' ');
-
-    addOutputLine(`<span class="prompt">$</span> ${input}`, "command-text");
-
-    switch (cmd) {
-        case 'help':
-            showHelp();
-            break;
-        case 'about':
-            showAbout();
-            break;
-        case 'skills':
-            showSkills();
-            break;
-        case 'projects':
-            showProjects();
-            break;
-        case 'experience':
-            showExperience();
-            break;
-        case 'certificates':
-            showCertificates();
-            break;
-        case 'resume':
-            showResume();
-            break;
-        case 'status':
-            showStatus();
-            break;
-        case 'sudo':
-            const fullCommand = input.trim().toLowerCase();
-            if (fullCommand === 'sudo hire sarim') {
-                showHireSarim();
-            } else {
-                addOutputLine("Permission denied. Try: sudo hire sarim", "error-text");
-            }
-            break;
-        case 'clear':
-            clearTerminal();
-            break;
-        case '':
-            break;
-        default:
-            addOutputLine(`WHOOP 🧟‍♀️🧟‍♀️🧟‍♀️🧟‍♀️🧟‍♀️🧟‍♀️`, "error-text");
-            addOutputLine(`Try typing 'help' to see all available commands.`, "info-text");
-    }
-}
-
-// Command implementations
-function showHelp() {
-    const commands = [
-        { cmd: 'help', desc: 'Show list of available commands' },
-        { cmd: 'about', desc: 'Display information about me' },
-        { cmd: 'skills', desc: 'Show technical skills' },
-        { cmd: 'projects', desc: 'List all projects' },
-        { cmd: 'experience', desc: 'Show work experience and education' },
-        { cmd: 'coding profile', desc: 'Show coding profiles (LeetCode, GitHub, LinkedIn, etc.)' },
-        { cmd: 'certificates', desc: 'Show certificates and certifications' },
-        { cmd: 'resume', desc: 'View and download resume' },
-        { cmd: 'status', desc: 'Show current status and availability' },
-        { cmd: 'sudo hire sarim', desc: 'Grant permission to hire (includes contact info)' },
-        { cmd: 'clear', desc: 'Clear the terminal screen' }
-    ];
-
-    let output = '<div class="section-title">Available Commands:</div>';
-    commands.forEach(item => {
-        output += `<div class="section-content"><span class="info-text">${item.cmd}</span> - ${item.desc}</div>`;
-    });
+        // Activate new node
+        this.activateNode(nodeId);
+    },
     
-    addOutputLine(output);
-}
-
-function showAbout() {
-    const about = portfolioData.about;
-    let output = `
-        <div class="section-title">About</div>
-        <div class="section-content">
-            <div><span class="info-text">Name:</span> ${about.name}</div>
-            <div><span class="info-text">Role:</span> ${about.role}</div>
-            <div><span class="info-text">Bio:</span> ${about.bio}</div>
-            <div><span class="info-text">Passion:</span> ${about.passion}</div>
-            <div><span class="info-text">Mindset:</span> ${about.mindset}</div>
-        </div>
-    `;
-    addOutputLine(output);
-}
-
-function showSkills() {
-    const skills = portfolioData.skills;
-    let output = '<div class="section-title">Skills Stack</div>';
-    
-    Object.keys(skills).forEach(category => {
-        output += `<div class="skill-group"><div class="skill-category">${category}:</div>`;
-        skills[category].forEach(skill => {
-            output += `<div class="skill-item">• ${skill}</div>`;
-        });
-        output += '</div>';
-    });
-    
-    addOutputLine(output);
-}
-
-function showProjects() {
-    const projects = portfolioData.projects;
-    let output = '<div class="section-title">Projects</div>';
-    
-    Object.keys(projects).forEach(key => {
-        const project = projects[key];
-        const desc = project.description.length > 60 ? project.description.substring(0, 60) + '...' : project.description;
-        let projectLine = `<div class="section-content"><span class="info-text">${project.name}</span> - ${desc}`;
-        if (project.livePreview) {
-            projectLine += ` <a href="${project.livePreview}" target="_blank" class="link">[Live Preview]</a>`;
-        }
-        projectLine += '</div>';
-        output += projectLine;
-    });
-    
-    addOutputLine(output);
-}
-
-function showExperience() {
-    const experience = portfolioData.experience;
-    const education = portfolioData.education;
-    
-    let output = '<div class="section-title">Experience</div>';
-    
-    experience.forEach(exp => {
-        output += `
-            <div class="section-content">
-                <div><span class="info-text">${exp.role}</span> at ${exp.company}</div>
-                <div>${exp.duration}</div>
-                <div class="project-detail">${exp.description}</div>
-            </div>
-        `;
-    });
-    
-    output += '<div class="section-title" style="margin-top: 20px;">Education</div>';
-    
-    education.forEach(edu => {
-        output += `
-            <div class="section-content">
-                <div><span class="info-text">${edu.degree}</span> in ${edu.field}</div>
-                <div>${edu.institution}</div>
-                <div>${edu.year}</div>
-                ${edu.cgpa ? `<div>${edu.cgpa}</div>` : ''}
-            </div>
-        `;
-    });
-    
-    addOutputLine(output);
-}
-
-function clearTerminal() {
-    terminalOutput.innerHTML = '';
-    addOutputLine("Terminal cleared.", "system-text");
-}
-
-function showCertificates() {
-    const certificates = portfolioData.certificates;
-    let output = '<div class="section-title">Certificates</div>';
-    output += '<div class="section-content">';
-    certificates.forEach(cert => {
-        output += `<div>• ${cert}</div>`;
-    });
-    output += '</div>';
-    addOutputLine(output);
-}
-
-function showResume() {
-    const resume = portfolioData.resume;
-    let output = `
-        <div class="section-title">Resume</div>
-        <div class="section-content">
-            <div style="margin-bottom: 12px;">
-                <span class="info-text">View Resume:</span> 
-                <a href="${resume.view}" target="_blank" class="link">Open in Google Drive</a>
-            </div>
-            <div>
-                <span class="info-text">Download Resume:</span> 
-                <a href="${resume.download}" target="_blank" class="link" download>Download PDF</a>
-            </div>
-        </div>
-    `;
-    addOutputLine(output);
-}
-
-function showStatus() {
-    let output = `
-        <div class="section-title">Current Status</div>
-        <div class="section-content">
-            <div>🟢 Actively learning</div>
-            <div>📱 Building Android apps</div>
-            <div>🚀 Open to internships & projects</div>
-        </div>
-    `;
-    addOutputLine(output);
-}
-
-function showHireSarim() {
-    const contact = portfolioData.contact;
-    let output = `
-        <div class="section-title" style="color: var(--accent-green);">Permission granted.</div>
-        <div class="section-content" style="color: var(--accent-green); font-size: 16px; margin-top: 12px;">
-            Welcome to the team 🚀
-        </div>
-        <div class="section-title" style="margin-top: 20px; color: var(--text-primary);">Contact Information</div>
-        <div class="section-content">
-            <div><span class="info-text">Email:</span> <a href="mailto:${contact.email}" class="link">${contact.email}</a></div>
-            <div><span class="info-text">Phone:</span> ${contact.phone}</div>
-            <div><span class="info-text">Location:</span> ${contact.location}</div>
-        </div>
-        <div class="section-title" style="margin-top: 20px; color: var(--text-primary);">Coding Profiles</div>
-        <div class="section-content">
-            <div><span class="info-text">LeetCode:</span> <a href="${contact.leetcode}" target="_blank" class="link">${contact.leetcodeStats}</a></div>
-            <div><span class="info-text">GitHub:</span> <a href="${contact.github}" target="_blank" class="link">github.com/Sarim2022</a></div>
-            <div><span class="info-text">LinkedIn:</span> <a href="${contact.linkedin}" target="_blank" class="link">linkedin.com/in/sarimhasanprofes67</a></div>
-            <div><span class="info-text">GeeksforGeeks:</span> <a href="${contact.geeksforgeeks}" target="_blank" class="link">geeksforgeeks.org/profile/sarimhasowyc</a></div>
-        </div>
-    `;
-    addOutputLine(output);
-}
-
-
-// Event listeners
-terminalInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        const command = terminalInput.value;
-        if (command.trim()) {
-            commandHistory.push(command);
-            historyIndex = commandHistory.length;
-            processCommand(command);
-        }
-        terminalInput.value = '';
-    } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-            historyIndex--;
-            terminalInput.value = commandHistory[historyIndex];
-        }
-    } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIndex < commandHistory.length - 1) {
-            historyIndex++;
-            terminalInput.value = commandHistory[historyIndex];
+    handleNodeHover(node, isEntering) {
+        if (BrainState.activeNode) return; // Don't change hover state when a node is active
+        
+        if (isEntering) {
+            // Speed up pulse animation on hover
+            node.classList.add('hovered');
+            // Show label
+            const label = node.querySelector('.node-label');
+            if (label) label.style.opacity = '1';
         } else {
-            historyIndex = commandHistory.length;
-            terminalInput.value = '';
+            node.classList.remove('hovered');
+            const label = node.querySelector('.node-label');
+            if (label) label.style.opacity = '';
+        }
+    },
+    
+    activateNode(nodeId) {
+        BrainState.isAnimating = true;
+        BrainState.activeNode = nodeId;
+        
+        // Hide instruction hint
+        if (DOM.instructionHint) {
+            DOM.instructionHint.classList.add('hidden');
+        }
+        
+        // Update node states
+        DOM.nodes.forEach(node => {
+            const id = node.dataset.node;
+            
+            if (id === nodeId) {
+                node.classList.add('active');
+                node.classList.remove('dimmed');
+            } else if (id === 'core') {
+                // Core node stays visible but slightly dimmed
+                node.classList.remove('active');
+                node.classList.remove('dimmed');
+            } else {
+                node.classList.remove('active');
+                node.classList.add('dimmed');
+            }
+        });
+        
+        // Activate connection line and signal
+        ConnectionManager.activateConnection(nodeId);
+        
+        // Open corresponding panel
+        setTimeout(() => {
+            PanelManager.openPanel(nodeId);
+            BrainState.isAnimating = false;
+        }, 300);
+    },
+    
+    deactivateNode() {
+        BrainState.isAnimating = true;
+        
+        // Close panel first
+        PanelManager.closePanel();
+        
+        setTimeout(() => {
+            // Reset all nodes
+            DOM.nodes.forEach(node => {
+                node.classList.remove('active', 'dimmed');
+            });
+            
+            // Deactivate connections
+            ConnectionManager.deactivateAll();
+            
+            BrainState.activeNode = null;
+            BrainState.isAnimating = false;
+        }, 300);
+    }
+};
+
+// ============================================
+// Panel Manager
+// ============================================
+const PanelManager = {
+    init() {
+        // Close button handlers
+        DOM.panels.forEach(panel => {
+            const closeBtn = panel.querySelector('.panel-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    NodeManager.deactivateNode();
+                });
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && BrainState.activePanel) {
+                NodeManager.deactivateNode();
+            }
+        });
+        
+        // Close on backdrop click (click outside panel)
+        DOM.container.addEventListener('click', (e) => {
+            if (BrainState.activePanel && 
+                !e.target.closest('.content-panel') && 
+                !e.target.closest('.neural-node')) {
+                NodeManager.deactivateNode();
+            }
+        });
+    },
+    
+    openPanel(nodeId) {
+        const panel = document.getElementById(`panel-${nodeId}`);
+        if (!panel) return;
+        
+        // Close any existing panel
+        DOM.panels.forEach(p => {
+            p.classList.remove('active');
+            p.setAttribute('aria-hidden', 'true');
+        });
+        
+        // Open new panel
+        panel.classList.add('active');
+        panel.setAttribute('aria-hidden', 'false');
+        BrainState.activePanel = nodeId;
+        
+        // Focus management for accessibility
+        const closeBtn = panel.querySelector('.panel-close');
+        if (closeBtn) {
+            setTimeout(() => closeBtn.focus(), 100);
+        }
+    },
+    
+    closePanel() {
+        DOM.panels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('aria-hidden', 'true');
+        });
+        BrainState.activePanel = null;
+    }
+};
+
+// ============================================
+// Ambient Particles
+// ============================================
+const ParticleManager = {
+    particleCount: 30,
+    
+    init() {
+        this.createParticles();
+    },
+    
+    createParticles() {
+        if (!DOM.ambientParticles) return;
+        
+        for (let i = 0; i < this.particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation delay and duration
+            particle.style.animationDelay = `${Math.random() * 15}s`;
+            particle.style.animationDuration = `${10 + Math.random() * 10}s`;
+            
+            // Random size
+            const size = 1 + Math.random() * 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random opacity
+            particle.style.opacity = 0.1 + Math.random() * 0.3;
+            
+            DOM.ambientParticles.appendChild(particle);
         }
     }
-});
+};
 
-// Auto-focus input when clicking terminal
-terminalOutput.addEventListener('click', () => {
-    terminalInput.focus();
-});
+// ============================================
+// Intro Animation
+// ============================================
+const IntroManager = {
+    duration: 2000,
+    
+    init() {
+        // Hide intro after animation
+        setTimeout(() => {
+            this.hideIntro();
+        }, this.duration);
+    },
+    
+    hideIntro() {
+        if (!DOM.introOverlay) return;
+        
+        DOM.introOverlay.classList.add('hidden');
+        BrainState.isIntroComplete = true;
+        
+        // Remove from DOM after transition
+        setTimeout(() => {
+            DOM.introOverlay.remove();
+        }, 800);
+    }
+};
 
-// Keep input focused
-terminalInput.addEventListener('blur', () => {
-    setTimeout(() => terminalInput.focus(), 100);
-});
+// ============================================
+// Keyboard Navigation
+// ============================================
+const KeyboardNav = {
+    nodeOrder: ['core', 'skills', 'projects', 'experience', 'learning', 'interests', 'contact'],
+    currentIndex: 0,
+    
+    init() {
+        document.addEventListener('keydown', (e) => this.handleKeydown(e));
+    },
+    
+    handleKeydown(e) {
+        // Tab navigation is handled by browser
+        // Add arrow key navigation
+        if (!BrainState.activePanel) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                this.focusNextNode(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                this.focusNextNode(-1);
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                const focusedNode = document.activeElement;
+                if (focusedNode && focusedNode.classList.contains('neural-node')) {
+                    e.preventDefault();
+                    focusedNode.click();
+                }
+            }
+        }
+    },
+    
+    focusNextNode(direction) {
+        this.currentIndex = (this.currentIndex + direction + this.nodeOrder.length) % this.nodeOrder.length;
+        const nodeId = this.nodeOrder[this.currentIndex];
+        const node = document.querySelector(`[data-node="${nodeId}"]`);
+        if (node) {
+            node.focus();
+        }
+    }
+};
 
-// Initialize
-initTerminal();
+// ============================================
+// Touch Gestures (Mobile)
+// ============================================
+const TouchManager = {
+    startX: 0,
+    startY: 0,
+    
+    init() {
+        if (!Utils.isTouchDevice()) return;
+        
+        document.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+        document.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+    },
+    
+    handleTouchStart(e) {
+        this.startX = e.touches[0].clientX;
+        this.startY = e.touches[0].clientY;
+    },
+    
+    handleTouchEnd(e) {
+        if (!BrainState.activePanel) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = this.startX - endX;
+        const diffY = this.startY - endY;
+        
+        // Swipe down to close panel
+        if (Math.abs(diffY) > 100 && diffY < 0 && Math.abs(diffX) < 50) {
+            NodeManager.deactivateNode();
+        }
+    }
+};
+
+// ============================================
+// Initialize Application
+// ============================================
+function init() {
+    // Initialize DOM references
+    DOM.init();
+    
+    // Initialize all managers
+    ConnectionManager.init();
+    NodeManager.init();
+    PanelManager.init();
+    ParticleManager.init();
+    IntroManager.init();
+    KeyboardNav.init();
+    TouchManager.init();
+    
+    // Log successful initialization
+    console.log('🧠 Brain Map Portfolio initialized');
+}
+
+// Start when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
