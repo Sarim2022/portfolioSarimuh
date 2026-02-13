@@ -87,9 +87,19 @@ body {
     font-size: 1.30rem;
     font-weight: 600;
     color: var(--white);
-    text-decoration: none;
-    letter-spacing: -0.02em;
+    display: inline-flex;         /* Makes text + image a flexible row */
+    align-items: center;          /* Vertically centers content */
+    gap: 1px;                     /* Space between text and icon */
+    text-decoration: none;        /* Remove underline */
+    color: var(--white);              /* Keep nav text color */
 }
+
+.logo-icon {
+    width: 24px;
+    height: 24px;
+}
+
+
 
 .nav-links {
     display: flex;
