@@ -84,9 +84,8 @@ body {
 
 .nav-logo {
     font-family: var(--font-sans);
-    font-size: 1.25rem;
+    font-size: 1.30rem;
     font-weight: 600;
-    font-style: italic;
     color: var(--white);
     text-decoration: none;
     letter-spacing: -0.02em;
