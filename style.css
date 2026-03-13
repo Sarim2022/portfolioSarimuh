@@ -86,12 +86,16 @@ body {
     font-family: var(--font-sans);
     font-size: 1.30rem;
     font-weight: 600;
-    color: var(--white);
-    display: inline-flex;         /* Makes text + image a flexible row */
-    align-items: center;          /* Vertically centers content */
-    gap: 1px;                     /* Space between text and icon */
-    text-decoration: none;        /* Remove underline */
-    color: var(--white);              /* Keep nav text color */
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    text-decoration: none;
+
+    /* New styles */
+    background: var(--white);
+    color: var(--blue-primary);
+    padding: 5px 16px;
+    border-radius: 5px;
 }
 
 .logo-icon {
