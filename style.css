@@ -52,6 +52,27 @@ html {
     scroll-behavior: smooth;
 }
 
+.visitor-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 body {
     font-family: var(--font-sans);
     background: var(--white);
@@ -82,21 +103,7 @@ body {
     backdrop-filter: blur(10px);
 }
 
-.nav-logo {
-    font-family: var(--font-sans);
-    font-size: 1.30rem;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 1px;
-    text-decoration: none;
 
-    /* New styles */
-    background: var(--white);
-    color: var(--blue-primary);
-    padding: 5px 16px;
-    border-radius: 5px;
-}
 
 .logo-icon {
     width: 24px;

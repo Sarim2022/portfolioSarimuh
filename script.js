@@ -202,6 +202,7 @@ if (document.readyState === 'loading') {
   const counterRef = doc(db, "portfolio", "visits");
 
   async function updateCounter() {
+    console.log("Running...");
     try {
       const docSnap = await getDoc(counterRef);
 
