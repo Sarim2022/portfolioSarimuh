@@ -18,6 +18,8 @@ const DOM = {
     }
 };
 
+
+
 // ============================================
 // Navigation
 // ============================================
@@ -177,3 +179,46 @@ if (document.readyState === 'loading') {
 } else {
     init();
 }
+
+
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } 
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // ✅ YOUR REAL CONFIG (you already shared)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCkQzReUKa0uVolRhnfUK4k8PrIACyRrPc",
+    authDomain: "portfoliocounter-c9064.firebaseapp.com",
+    projectId: "portfoliocounter-c9064",
+    storageBucket: "portfoliocounter-c9064.firebasestorage.app",
+    messagingSenderId: "778679627478",
+    appId: "1:778679627478:web:6692e171d8d0fa7181e377"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const counterRef = doc(db, "portfolio", "visits");
+
+  async function updateCounter() {
+    try {
+      const docSnap = await getDoc(counterRef);
+
+      if (docSnap.exists()) {
+        await updateDoc(counterRef, {
+          count: increment(1)
+        });
+
+        document.getElementById("counter").innerText =
+          docSnap.data().count + 1;
+      } else {
+        await setDoc(counterRef, { count: 1 });
+        document.getElementById("counter").innerText = 1;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  updateCounter();
