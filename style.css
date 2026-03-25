@@ -998,7 +998,7 @@ body {
         image-rendering: -webkit-optimize-contrast;
     }
 }
-
+/* //sb pafabn */
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     *,
