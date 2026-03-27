@@ -18,6 +18,17 @@ const DOM = {
     }
 };
 
+// ============================================
+// Project View Mode
+// ============================================
+const ProjectView = {
+    init() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('projects') === 'all') {
+            document.body.classList.add('show-all-projects');
+        }
+    }
+};
 
 
 // ============================================
@@ -165,6 +176,7 @@ const addAnimationStyles = () => {
 // ============================================
 function init() {
     DOM.init();
+    ProjectView.init();
     Navigation.init();
     SmoothScroll.init();
     addAnimationStyles();
