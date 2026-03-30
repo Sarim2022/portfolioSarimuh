@@ -7,620 +7,259 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <header class="nav-header"> 
-         <a href="#" class="nav-logo">
-        
-        </a>
-
-
-        <nav class="nav-links">
-            <a href="#intro">About 🐶</a>
-            <a href="#experience">Experience 🎬</a>
-        
-            <a href="#projects">Projects 🈹</a>
-        
-            <a href="#skills">Skills ⏳</a>
-            <a href="#contact">Contact 🗓️</a>
-            <!-- Social Icons -->
-            <div class="nav-social">
-                <a href="mailto:sarimhasan2022@gmail.com" aria-label="Email">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect width="20" height="16" x="2" y="4" rx="2"/>
-                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                    </svg>
-                </a>
-                <a href="https://github.com/Sarim2022" target="_blank" aria-label="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
-                        <path d="M9 18c-4.51 2-5-2-7-2"/>
-                    </svg>
-                </a>
-                <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                        <rect width="4" height="12" x="2" y="9"/>
-                        <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                </a>
-                <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" aria-label="LeetCode">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m16 18 6-6-6-6"/>
-                        <path d="m8 6-6 6 6 6"/>
-                    </svg>
-                </a>
-              
-              
-            </div>
+    <header class="site-header" id="top">
+        <a href="#top" class="site-logo" aria-label="Home">Sarim</a>
+        <nav class="site-nav" aria-label="Primary">
+            <a href="#intro">Intro</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
         </nav>
-        <!-- Mobile Menu Toggle -->
-        <button class="nav-toggle" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="site-header__actions">
+            <a href="mailto:sarimhasan2022@gmail.com" class="icon-btn" aria-label="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+            <a href="https://github.com/Sarim2022" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+        </div>
+        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
         </button>
     </header>
 
-    <!-- Hero Section - Blue Background -->
-    <section class="hero">
-        <div class="hero-container">
-            <!-- <div class="hero-image">
-                <img src="myprofile.jpeg" alt="Sarim Hasan" class="profile-img">
-            </div> -->
-            <div class="hero-content">
-                <h1 class="hero-title">Android Dev at Paytm 🧑‍💻</h1>
-                <p class="hero-subtitle">Final Year Student Jamia Hamdard University</p>
-                </div>
-        </div>
-    </section>
+    <div class="nav-backdrop" hidden aria-hidden="true"></div>
 
-    <!-- Intro Section - Image Background -->
-    <section class="intro-section" id="intro">
-        <div class="intro-container">
-            <div class="intro-label">
-                <span class="label-line"></span>
-                <span class="label-text">Intro 🎥</span>
-            </div>
-            <div class="intro-content">
-                <p class="intro-text">
+    <main>
+        <!-- Minimal intro -->
+        <section class="section intro-hero" id="intro">
+            <div class="wrap intro-hero__inner">
+                <p class="intro-hero__eyebrow">Android · Jamia Hamdard</p>
+                <h1 class="intro-hero__title">Sarim Hasan</h1>
+                <p class="intro-hero__role">Android Developer at Paytm</p>
+                <p class="intro-hero__text">
                     I am a passionate Android developer pursuing my B.Tech in Computer Science at Jamia Hamdard University, New Delhi. My journey in technology has been defined by a constant drive to build solutions that solve real-world problems. Currently interning at Paytm as an Android Developer, I am enhancing app UI and integrating backend APIs to improve user experience and payment functionalities. Beyond mobile development, I am deeply interested in Machine Learning and Artificial Intelligence, continuously expanding my skill set to stay at the forefront of technological innovation.
                 </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Hobby Section -->
-    <!--
-    <section class="section hobby-section" id="hobby">
-        <div class="hobby-content">
-            <h2 class="hobby-title">My Hobby</h2>
-        </div>
-    </section>
-    -->
+        <!-- Experience: commit-style feed -->
+        <section class="section experience-section" id="experience">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 class="section-head__title">Experience</h2>
+                    <p class="section-head__sub">Recent activity, like a contribution log.</p>
+                </header>
+                <div class="commit-feed" role="list">
+                    <article class="commit-row" role="listitem">
+                        <div class="commit-row__gutter">
+                            <span class="commit-avatar" aria-hidden="true">S</span>
+                        </div>
+                        <div class="commit-row__body">
+                            <div class="commit-meta">
+                                <span class="commit-author">Sarim</span>
+                                <span class="commit-sep">·</span>
+                                <time class="commit-date" datetime="2025-07">Jul 2025 — Present</time>
+                            </div>
+                            <h3 class="commit-subject">Android Intern — Paytm</h3>
+                            <p class="commit-body">Improving Android app UI and integrating backend APIs to enhance user experience and payment flows.</p>
+                        </div>
+                    </article>
+                    <article class="commit-row" role="listitem">
+                        <div class="commit-row__gutter">
+                            <span class="commit-avatar" aria-hidden="true">S</span>
+                        </div>
+                        <div class="commit-row__body">
+                            <div class="commit-meta">
+                                <span class="commit-author">Sarim</span>
+                                <span class="commit-sep">·</span>
+                                <time class="commit-date" datetime="2022">2022 — Present</time>
+                            </div>
+                            <h3 class="commit-subject">B.Tech Computer Science — Jamia Hamdard</h3>
+                            <p class="commit-body">Final year. 7.5 CGPA through 7th semester.</p>
+                        </div>
+                    </article>
+                    <article class="commit-row" role="listitem">
+                        <div class="commit-row__gutter">
+                            <span class="commit-avatar" aria-hidden="true">S</span>
+                        </div>
+                        <div class="commit-row__body">
+                            <div class="commit-meta">
+                                <span class="commit-author">Sarim</span>
+                                <span class="commit-sep">·</span>
+                                <time class="commit-date" datetime="2025">2025</time>
+                            </div>
+                            <h3 class="commit-subject">Google Cloud Arcade Facilitator</h3>
+                            <p class="commit-body">50+ badges and swag through the C1 program.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-    <!-- Experience Section -->
-    <section class="section experience-section" id="experience">
-        <div class="section-container">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Experience 🌌</span>
+        <!-- Projects: git branch timeline -->
+        <section class="section projects-section" id="projects">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 class="section-head__title">Projects</h2>
+                    <p class="section-head__sub">Shipped work along a single branch.</p>
+                </header>
+                <div class="git-branch" aria-label="Project timeline">
+                    <div class="git-branch__line" aria-hidden="true"></div>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">mini-jira</span>
+                            <h3 class="git-node__title">MiniJira</h3>
+                            <p class="git-node__desc">Projects, tasks, collaboration, realtime updates.</p>
+                            <p class="git-node__tech">HTML · CSS · JS · Firebase</p>
+                            <a href="https://sarim2022.github.io/miniJirabuddy/" target="_blank" rel="noopener noreferrer" class="git-node__link">Open live →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">link-forge</span>
+                            <h3 class="git-node__title">LinkForge</h3>
+                            <p class="git-node__desc">Personal finance: wallets, budgets, reminders.</p>
+                            <p class="git-node__tech">Kotlin · Jetpack · Firebase</p>
+                            <a href="https://github.com/Sarim2022/LinkForge/releases/download/v1.0.0/app-debug.apk" target="_blank" rel="noopener noreferrer" class="git-node__link">Download APK →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">sharetexi</span>
+                            <h3 class="git-node__title">sharetexi</h3>
+                            <p class="git-node__desc">Lightweight chat for sharing thoughts with friends.</p>
+                            <p class="git-node__tech">HTML · CSS · JS · Firebase</p>
+                            <a href="https://sarim2022.github.io/shareyourthough5min/" target="_blank" rel="noopener noreferrer" class="git-node__link">Open live →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">med-reminders</span>
+                            <h3 class="git-node__title">MedReminders</h3>
+                            <p class="git-node__desc">Medicine alerts and health tracking.</p>
+                            <p class="git-node__tech">Flutter · ML · Firebase</p>
+                            <a href="https://sarim2022.github.io/medremainders/" target="_blank" rel="noopener noreferrer" class="git-node__link">Open →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">android-todo</span>
+                            <h3 class="git-node__title">Android ToDo</h3>
+                            <p class="git-node__desc">Task management with sync and clean UI.</p>
+                            <p class="git-node__tech">Kotlin · Java · Firebase</p>
+                            <a href="https://github.com/Sarim2022/Android-ToDo-App/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer" class="git-node__link">View release →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">mark-attendance</span>
+                            <h3 class="git-node__title">MarkMyAttendance</h3>
+                            <p class="git-node__desc">Campus attendance with secure login.</p>
+                            <p class="git-node__tech">Android · Kotlin · Firebase</p>
+                            <a href="https://github.com/Sarim2022/markme/releases/tag/v1.0.3" target="_blank" rel="noopener noreferrer" class="git-node__link">View release →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">crackerscode</span>
+                            <h3 class="git-node__title">Crackerscode</h3>
+                            <p class="git-node__desc">Password generator and strength checker.</p>
+                            <p class="git-node__tech">JavaScript · HTML · CSS</p>
+                            <a href="https://sarim2022.github.io/Crackerscode/" target="_blank" rel="noopener noreferrer" class="git-node__link">Open live →</a>
+                        </div>
+                    </article>
+                    <article class="git-node">
+                        <div class="git-node__marker" aria-hidden="true"></div>
+                        <div class="git-node__card">
+                            <span class="git-node__hash">dev-simulation</span>
+                            <h3 class="git-node__title">Dev Simulation</h3>
+                            <p class="git-node__desc">Layout and motion experiment on the web.</p>
+                            <p class="git-node__tech">HTML · CSS</p>
+                            <a href="https://sarim2022.github.io/devsimulationgit/" target="_blank" rel="noopener noreferrer" class="git-node__link">Open live →</a>
+                        </div>
+                    </article>
+                </div>
+                <p class="projects-more">
+                    <a href="index.html?projects=all#projects" class="projects-more__link">Browse all projects</a>
+                </p>
             </div>
-            <div class="section-content">
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Android Intern</h3>
-                        <span class="experience-company">Paytm</span>
-                    </div>
-                    <span class="experience-date">July 2025 - Present</span>
-                    <p class="experience-desc">Improving Android app UI and integrating backend APIs to enhance user experience and payment functionalities.</p>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-title">B.Tech in Computer Science</h3>
-                        <span class="experience-company">Jamia Hamdard University, New Delhi</span>
-                    </div>
-                    <span class="experience-date">2022 - Present</span>
-                    <p class="experience-desc">Currently 8th sem</p>
-                    <p class="experience-desc">7.5 CGPA till 7th sem</p>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Google Cloud Arcade Facilitator</h3>
-                        <span class="experience-company">Google Cloud</span>
-                    </div>
-                    <span class="experience-date">2025</span>
-                    <p class="experience-desc">Earned 50+ badges and won exclusive swag through the C1 program.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section class="section projects-section" id="projects">
-        <div class="section-container">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Projects</span>
-            </div>
-            <div class="section-content">
-                <div class="projects-grid">
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Web Task Jira</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>html</span>
-                                        <span>css</span>
-                                        <span>Javascript</span>
-                                        <span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">MiniJira</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Built & shipped | Solo</p>
-                            <h4 class="project-name">MiniJira</h4>
-                            <p class="project-desc">Create Projects , Task , team Collaboration , realtime updates</p>
-                            <span class="project-tech">html | CSS | JS</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Web</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Productivity</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Shipped</strong>
-                                </div>
-                            </div>
-                            <a href="https://sarim2022.github.io/miniJirabuddy/" target="_blank" class="project-link">live project -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Android finance</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>Kotlin</span>
-                                        <span>Firebase</span>
-                                        <span>Mobile</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">LinkForge</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Built & shipped | Solo</p>
-                            <h4 class="project-name">LinkForge</h4>
-                            <p class="project-desc">LinkForge is a smart personal finance app that helps you track wallets, transactions, budgets, savings, and reminders in one simple dashboard.</p>
-                            <span class="project-tech">Kotlin | Jetpack | Firebase</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Android</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Finance UI</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Shipped</strong>
-                                </div>
-                            </div>
-                            <a href="https://github.com/Sarim2022/LinkForge/releases/download/v1.0.0/app-debug.apk" target="_blank" class="project-link">Download APK -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Web chat</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>HTML</span>
-                                        <span>JS</span>
-                                        <span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">sharetexi</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Live project | Solo</p>
-                            <h4 class="project-name">sharetexi</h4>
-                            <p class="project-desc">A simple chat concept for sharing thoughts and keeping conversations with friends easy and fast.</p>
-                            <span class="project-tech">HTML | CSS | JS | Firebase</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Web</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Messaging</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Live</strong>
-                                </div>
-                            </div>
-                            <a href="https://sarim2022.github.io/shareyourthough5min/" target="_blank" class="project-link">Open project -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Health alerts</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>Flutter</span>
-                                        <span>ML</span>
-                                        <span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">MedReminders</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Mobile product | Solo</p>
-                            <h4 class="project-name">MedReminders App</h4>
-                            <p class="project-desc">Mobile app for medicine intake alerts and health tracking with intelligent reminders.</p>
-                            <span class="project-tech">Flutter | ML | Firebase</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Flutter</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Reminders</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Shipped</strong>
-                                </div>
-                            </div>
-                            <a href="https://sarim2022.github.io/medremainders/" target="_blank" class="project-link">Download app -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Task flow</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>Kotlin</span>
-                                        <span>Java</span>
-                                        <span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">Android ToDo</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Built & shipped | Solo</p>
-                            <h4 class="project-name">Android ToDo App</h4>
-                            <p class="project-desc">Comprehensive task management with intuitive UI and seamless data sync.</p>
-                            <span class="project-tech">Kotlin | Java | Firebase</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Android</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Productivity</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Shipped</strong>
-                                </div>
-                            </div>
-                            <a href="https://github.com/Sarim2022/Android-ToDo-App/releases/tag/v1.0.0" target="_blank" class="project-link">View project -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Attendance</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>Android</span>
-                                        <span>Kotlin</span>
-                                        <span>Firebase</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">MarkMyAttendance</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Built for campus | Solo</p>
-                            <h4 class="project-name">MarkMyAttendance</h4>
-                            <p class="project-desc">Digital attendance system for students with secure login and real-time tracking.</p>
-                            <span class="project-tech">Android | Kotlin | Firebase</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Android</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Tracking</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Shipped</strong>
-                                </div>
-                            </div>
-                            <a href="https://github.com/Sarim2022/markme/releases/tag/v1.0.3" target="_blank" class="project-link">View project -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">Password tool</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>JS</span>
-                                        <span>HTML</span>
-                                        <span>CSS</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">Crackerscode</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Web utility | Solo</p>
-                            <h4 class="project-name">Crackerscode</h4>
-                            <p class="project-desc">Password generator and strength checker for creating secure passwords.</p>
-                            <span class="project-tech">JavaScript | HTML | CSS</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>Browser</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Security</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Live</strong>
-                                </div>
-                            </div>
-                            <a href="https://sarim2022.github.io/Crackerscode/" target="_blank" class="project-link">View project -></a>
-                        </div>
-                    </article>
-                    <article class="project-card">
-                        <div class="project-art">
-                            <span class="project-art__badge">UI experiment</span>
-                            <div class="project-art__frame">
-                                <div class="project-art__topbar">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                                <div class="project-art__screen">
-                                    <div class="project-art__hero"></div>
-                                    <div class="project-art__rows">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="project-art__chips">
-                                        <span>HTML</span>
-                                        <span>CSS</span>
-                                        <span>Motion</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <span class="project-art__title">Dev Simulation</span>
-                        </div>
-                        <div class="project-content">
-                            <p class="project-kicker"><span></span> Design experiment | Solo</p>
-                            <h4 class="project-name">Dev Simulation</h4>
-                            <p class="project-desc">A small web experiment focused on layout, structure, and playful developer motion.</p>
-                            <span class="project-tech">HTML | CSS</span>
-                            <div class="project-stats">
-                                <div>
-                                    <span>Stack</span>
-                                    <strong>HTML</strong>
-                                </div>
-                                <div>
-                                    <span>Focus</span>
-                                    <strong>Layout</strong>
-                                </div>
-                                <div>
-                                    <span>Status</span>
-                                    <strong>Prototype</strong>
-                                </div>
-                            </div>
-                            <a href="https://sarim2022.github.io/devsimulationgit/" target="_blank" class="project-link">View project -></a>
-                        </div>
-                    </article>
-                </div>
-                <div class="projects-cta">
-                    <a href="index.html?projects=all#projects" target="_blank" rel="noopener noreferrer" class="btn btn-primary">All Projects</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section skills-section" id="skills">
-        <div class="section-container">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Skills 🌋</span>
-            </div>
-            <div class="section-content">
-                <div class="skills-category">
-                    <h4 class="skills-title">Languages</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Kotlin</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
-                        <span class="skill-tag">XML</span>
-                          <span class="skill-tag">Jetpack Compose</span>
+        <!-- Skills: marquee -->
+        <section class="section skills-section" id="skills">
+            <div class="wrap">
+                <header class="section-head">
+                    <h2 class="section-head__title">Skills</h2>
+                    <p class="section-head__sub">Stack in motion — pauses when you hover or use reduced motion.</p>
+                </header>
+                <div class="skills-marquee" data-marquee>
+                    <div class="skills-marquee__track">
+                        <ul class="skills-marquee__row" aria-label="Languages and tools">
+                            <li>Java</li><li>Kotlin</li><li>Python</li><li>SQL</li><li>HTML</li><li>CSS</li><li>XML</li><li>Jetpack Compose</li>
+                            <li>REST APIs</li><li>Firebase</li><li>DSA</li><li>Android</li><li>Git</li>
+                        </ul>
+                        <ul class="skills-marquee__row" aria-hidden="true">
+                            <li>Java</li><li>Kotlin</li><li>Python</li><li>SQL</li><li>HTML</li><li>CSS</li><li>XML</li><li>Jetpack Compose</li>
+                            <li>REST APIs</li><li>Firebase</li><li>DSA</li><li>Android</li><li>Git</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="skills-category">
-                    <h4 class="skills-title">Technologies & Concepts</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag">Data Structures</span>
-                        <span class="skill-tag">Algorithms</span>
-                        <span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">Firebase</span>
-                    </div>
-                </div>
-                <div class="skills-category">
-                    <h4 class="skills-title">Currently Learning</h4>
-                    <div class="skills-list">
-                        <span class="skill-tag learning">Backend Technologies</span>
-                        <span class="skill-tag learning">SpringBoot</span>
-                        <span class="skill-tag learning">Java</span>
-                        <span class="skill-tag learning">Jetpack Compose</span>
+                <div class="skills-marquee skills-marquee--reverse" data-marquee>
+                    <div class="skills-marquee__track">
+                        <ul class="skills-marquee__row">
+                            <li>Spring Boot</li><li>Backend</li><li>ML curiosity</li><li>UI polish</li><li>API design</li><li>Play Console</li><li>Gradle</li><li>Material</li>
+                        </ul>
+                        <ul class="skills-marquee__row" aria-hidden="true">
+                            <li>Spring Boot</li><li>Backend</li><li>ML curiosity</li><li>UI polish</li><li>API design</li><li>Play Console</li><li>Gradle</li><li>Material</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="section contact-section" id="contact">
-        <div class="section-container">
-            <div class="section-label">
-                <span class="label-line"></span>
-                <span class="label-text">Contact 📱</span>
-            </div>
-            <div class="section-content">
-                <div class="contact-grid">
-                    <a href="mailto:sarimhasan2022@gmail.com" class="contact-card">
-                        <span class="contact-icon">✉</span>
-                        <span class="contact-info">sarimhasan2022@gmail.com</span>
-                    </a>
-                    <a href="https://github.com/Sarim2022" target="_blank" class="contact-card">
-                        <span class="contact-icon">⌘</span>
-                        <span class="contact-info">GitHub</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" class="contact-card">
-                        <span class="contact-icon">◫</span>
-                        <span class="contact-info">LinkedIn</span>
-                    </a>
-                    <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" class="contact-card">
-                        <span class="contact-icon">◈</span>
-                        <span class="contact-info">LeetCode (150+ Problems)</span>
-                    </a>
+        <!-- Contact + footer -->
+        <section class="section contact-section" id="contact">
+            <div class="wrap contact-block">
+                <h2 class="contact-block__title">Let’s talk</h2>
+                <p class="contact-block__lead">Open to roles and collaborations. New Delhi, India.</p>
+                <div class="contact-block__cta">
+                    <a href="mailto:sarimhasan2022@gmail.com" class="btn btn-primary">Email me</a>
+                    <a href="Resume.pdf" target="_blank" class="btn btn-ghost">View resume</a>
+                    <a href="Resume.pdf" download class="btn btn-ghost">Download resume</a>
                 </div>
-               <div class="resume-buttons">
-                    <a href="Resume.pdf" target="_blank" class="btn btn-outline">
-                        View Resume
-                    </a>
-                   <a href="mailto:sarimhasan2022@gmail.com?subject=Project Inquiry&body=Hi Sarim" class="btn btn-outline">
-                        Contact me ! 
-                    </a>
-                    
-                    <a href="Resume.pdf" download class="btn btn-outline">
-                        Download Resume
-                    </a>
-                </div>
-                <p class="location">📍 New Delhi, India</p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2026 Sarim Hasan. Available for opportunities.</p>
+    <footer class="site-footer">
+        <div class="wrap site-footer__inner">
+            <p class="site-footer__copy">© 2026 Sarim Hasan</p>
+            <nav class="site-footer__nav" aria-label="Footer">
+                <a href="mailto:sarimhasan2022@gmail.com">Email</a>
+                <a href="https://github.com/Sarim2022" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/sarimhasanprofes67" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://leetcode.com/u/sarimhasan2022/" target="_blank" rel="noopener noreferrer">LeetCode</a>
+                <a href="#intro">Intro</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+            </nav>
+        </div>
     </footer>
 
     <script type="module" src="script.js"></script>
