@@ -214,7 +214,10 @@ body.menu-open .nav-backdrop {
 }
 
 .intro-hero__text {
-    font-size: 1.0625rem;
+    font-family: var(--mono);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     color: var(--text);
     line-height: 1.75;
 }
