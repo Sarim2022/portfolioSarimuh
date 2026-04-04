@@ -432,17 +432,7 @@ body.menu-open .nav-backdrop {
     color: var(--accent);
 }
 
-/* Collapse extra projects on small screens unless ?projects=all */
-@media (max-width: 480px) {
-    /* Show first three projects; rest via "Browse all" + ?projects=all */
-    body:not(.show-all-projects) .git-branch > .git-node:nth-child(n + 5) {
-        display: none;
-    }
 
-    body:not(.show-all-projects) .projects-more {
-        display: block;
-    }
-}
 
 body.show-all-projects .git-node {
     display: grid;
