@@ -2,7 +2,7 @@
 
 :root {
     --bg: #000000;            /* PURE BLACK */
-    --bg-muted: #0a0a0a;      /* slight elevation */
+    --bg-muted: #000000;      /* slight elevation */
     --bg-soft: #111111;       /* cards */
 
     --border: #1f1f1f;
