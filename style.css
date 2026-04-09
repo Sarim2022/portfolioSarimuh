@@ -661,14 +661,22 @@ body.show-all-projects .git-node {
         display: none;
     }
 
-    .contact-block__cta {
+.contact-block__cta {
+        display: flex;
         flex-direction: column;
+        align-items: center;    /* This centers the flex items horizontally */
+        gap: 0.75rem;           /* Adds space between stacked buttons */
+        width: 100%;
     }
 
     .btn {
         width: 100%;
         max-width: 280px;
+        margin-left: auto;      /* Explicit centering */
+        margin-right: auto;     /* Explicit centering */
     }
+
+
 
     .site-footer__inner {
         align-items: stretch;
@@ -703,4 +711,90 @@ body.show-all-projects .git-node {
         transform: none;
         transition: none;
     }
+}
+/* Updated Theme Variables */
+:root {
+    /* The New Gradient Background */
+    --bg-gradient: linear-gradient(135deg, #e8f5e9 0%, #ffffff 50%, #e3f2fd 100%);
+    
+    /* UI Element Colors - Adjusted for light background */
+    --bg: #ffffff; 
+    --bg-muted: rgba(255, 255, 255, 0.5);
+    --bg-soft: rgba(255, 255, 255, 0.8); 
+
+    --border: #d1d5db;
+    --border-subtle: #e5e7eb;
+
+    --text: #1f2937;        /* Dark gray for better readability */
+    --text-muted: #6b7280;
+
+    --accent: #2e7d32;      /* A deep green for links/actions */
+    --accent-hover: #1565c0; /* A blue for hover states */
+
+    --mono: "JetBrains Mono", monospace;
+    --sans: "Inter", sans-serif;
+
+    --header-h: 64px;
+    --radius: 10px;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --transition: 0.2s ease;
+}
+
+body {
+    font-family: var(--sans);
+    background: var(--bg-gradient); /* Applied the gradient */
+    background-attachment: fixed;   /* Keeps the gradient still while scrolling */
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: var(--header-h);
+}
+
+/* ---------- Header Adjustment ---------- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1.25rem;
+    background: rgba(255, 255, 255, 0.7); /* Translucent white */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ---------- Experience/Project Card Tweaks ---------- */
+.commit-feed, .git-node__card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow);
+}
+
+.commit-row__gutter {
+    background: rgba(0, 0, 0, 0.03); /* Subtle contrast for the avatar column */
+}
+
+.commit-avatar {
+    background: var(--text);
+    color: #ffffff;
+}
+
+/* ---------- Section Backgrounds ---------- */
+/* Removing solid backgrounds so the main gradient shows through */
+.experience-section, .skills-section, .projects-section {
+    background: transparent;
+}
+
+/* Skills Marquee li */
+.skills-marquee__row li {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    color: var(--text);
 }
